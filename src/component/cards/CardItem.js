@@ -28,7 +28,7 @@ const CardItems = (props) => {
     };
     
     return (
-    <div className="m-1 w-max p-3 border-2 border-gray-300 rounded-lg bg-white box-content flex flex-row">
+    <div className="m-1 w-62 p-3 border-2 border-gray-300 rounded-lg bg-white box-content flex flex-row">
         <div className="w-20 h-36 mr-3 rounded-lg bg-white grid place-content-center">
             {
                 (props.type === 'product') ?

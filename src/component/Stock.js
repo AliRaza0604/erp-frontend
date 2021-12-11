@@ -8,73 +8,6 @@ import { useState, useEffect } from "react";
 
 
 
-const dataproduct = [
-    {
-        id: 1,
-        price: "120",
-        name: "Bulb",
-        description: "12v green color",
-        quantity: "10",
-    },
-    {
-        id: 2,
-        price: "120",
-        name: "Bulb",
-        description: "12v green color",
-        quantity: "10",
-    },
-    {
-        id: 3,
-        price: "120",
-        name: "Bulb",
-        description: "12v green color",
-        quantity: "10",
-    },
-    {
-        id: 4,
-        price: "120",
-        name: "Bulb",
-        description: "12v green color",
-        quantity: "10",
-    },
-    {
-        id: 5,
-        price: "120",
-        name: "Bulb",
-        description: "12v green color",
-        quantity: "10",
-    },
-    {
-        id: 6,
-        price: "120",
-        name: "Bulb",
-        description: "12v green color",
-        quantity: "10",
-    },
-    {
-        id: 7,
-        price: "120",
-        name: "Bulb",
-        description: "12v green color",
-        quantity: "10",
-    },
-    {
-        id: 8,
-        price: "120",
-        name: "Bulb",
-        description: "12v green color",
-        quantity: "10",
-    },
-    {
-        id: 9,
-        price: "120",
-        name: "Bulb1",
-        description: "12v green color",
-        quantity: "10",
-    },  
-    
-]
-
 let instance = axios.create({
     baseURL: 'https://ssm-erp-backend.herokuapp.com',
     headers: {
@@ -109,7 +42,7 @@ const Stock = () => {
                 }
             );
             console.log(res);
-            setProduct(dataproduct);
+            setProduct(res.data);
         }
         catch (e) {
             console.log(e);
