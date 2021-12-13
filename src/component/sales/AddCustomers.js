@@ -123,9 +123,8 @@ const handleSubmit = async (e) => {
 
                         <div className="col-span-6 sm:col-span-6">
                             <label htmlFor="phonenum" className="block text-sm font-medium text-text2" >Phone Number</label>
-                            <input type="number"
+                            <input type="text"
                             placeholder="03XX-XXXXXXX"
-                            min="0"
                             name="phonenum"
                             id="phonenum"
                             required

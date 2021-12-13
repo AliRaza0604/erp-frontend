@@ -1,138 +1,162 @@
-import React from "react";
-import { useState } from "react";
-import QuantityButton from "../forms/QuantityButton";
+import React, {useState, useEffect} from "react";
+import Basket from "./Basket";
+import Main from "./Main";
+import axios from "axios";
+
+let instance = axios.create({
+    baseURL: 'https://ssm-erp-backend.herokuapp.com',
+    headers: {
+        get: {
+            'Content-Type': 'application/json'
+        },
+        post: {
+            'Content-Type': 'application/json'
+        }
+    }
+})
 
 const AddProduction = () => {
-    const [usertype, setproducttype] = useState(null);
-    const handleusertype = obj => {
-        setproducttype(obj.value);
 
-        setproductRegisteration({...productRegisteration, role : obj.value})
+    var today = new Date(),
+    date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+    const [prodid, setprodid] = useState('');
+    const [duedate, setDuedate] = useState();
+    const [startdate, setstartdate] = useState(date);
+    // const [collectorid, setCollectorid] = useState('null');
+    const [staffid, setStaffid] = useState(localStorage.getItem('staffid'));
+    const [quantity, setQuantity] = useState('');
+
+    const fun =  (async () => {
+        try {
+            let res = await instance.get('/api/inventory/',
+                {
+                    // headers: {
+                    //     "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    // }
+                }
+            );
+            console.log(res);
+            setProducts(res.data);
+        }
+        catch (e) {
+            console.log(e);
+        }
+    })
+
+    useEffect( () => {fun()},[])
+    const [products,setProducts] = useState();
+    // const {products} = data;
+    const [components, setcomponents] = useState([]);
+
+    const onAdd = (product) => {
+        const exist = components.find((x) => x.itemid === product.itemid);
+        if (exist) {
+        setcomponents(
+            components.map((x) =>
+            x.itemid === product.itemid ? { ...exist, "quantity": exist.quantity + 1 } : x
+            )
+        );
+        } else {
+        setcomponents([...components, { ...product, "quantity": 1 }]);
+        }
+    };
+   
+
+    const onAdd2 = (product) => {
+        const exist = components.find((x) => x.itemid === product.itemid);
+        if (exist) {
+        setcomponents(
+            components.map((x) =>
+            x.itemid === product.itemid ? { ...exist, amount: exist.amount + exist.price } : x
+            )
+        );
+        } else {
+        setcomponents([...components, { ...product, amount: exist.price }]);
+        }
+    };
+
+
+    const onRemove = (product) => {
+        const exist = components.find((x) => x.itemid === product.itemid);
+        if (exist.quantity === 1) {
+        setcomponents(components.filter((x) => x.itemid !== product.itemid));
+        } else {
+        setcomponents(
+            components.map((x) =>
+            x.itemid === product.itemid ? { ...exist, quantity: exist.quantity - 1 } : x
+            )
+        );
+        }
+    };
+
+    const onCheckout = async () => {
+        console.log(components)
+        // console.log(localStorage.getItem('staffid'))
+        console.log(prodid)
+        // console.log(duedate)
+        console.log(staffid)
+        console.log(startdate)
+        console.log(quantity)
+        // console.log(collectorid)
+
+        try {
+          let res = await instance.post('/api/productions/',
+              {
+                  // headers: {
+                  //     "Authorization": `Bearer ${localStorage.getItem('token')}`
+                  // }
+
+                  "startdate":startdate,
+                  quantity,
+                  staffid,
+                  prodid,
+                  components
+              }
+          );
+          console.log(res);
+        }
+        catch (e) {
+            console.log(e);
+        }
+
     }
-    const [productRegisteration, setproductRegisteration] = useState({
-        productname: "",
-        quantity: "",
-        startdate: "",
-        enddate: "",
-    });
 
-    const handleInput = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-
-        setproductRegisteration({...productRegisteration, [name] : value})
-    }
-
-    const handleSubmit = (e) => {
-        //send to backend from here
-        e.preventDefault();
-        
-        const newuser = {...productRegisteration}
-        console.log(newuser)
-
-        setproductRegisteration({
-        productname: "",
-        quantity: "",
-        startdate: "",
-        enddate: "",});
-    }
     return(
-        <>
-        <div>
-          <div className="md:grid md:grid-cols-3 md:gap-6">
-            <div className="md:col-span-1">
-              <div className="px-4 sm:px-0">
-                <h3 className="text-lg font-medium pl-2 leading-6 text-text2">Add New Production</h3>
-                <p className="mt-1 text-sm pl-2 text-text3">
-                  This order will be placed into production so be careful what you enter.
-                </p>
-              </div>
-            </div>
-            <div className="mt-5 md:mt-0 md:col-span-2">
-              <form action="" onSubmit={handleSubmit}>
-                <div className="shadow sm:rounded-md sm:overflow-hidden">
-                  <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
-                    <div className="grid grid-cols-6 gap-6">
-                      
-                      <div className="col-span-6 sm:col-span-4">
-                        <label htmlFor="product-name" className="block text-sm font-medium text-text2" >Product Name</label>
-                        <input type="text"
-                          name="productname"
-                          id="productname"
-                          required
-                          value={productRegisteration.productname}
-                          onChange={handleInput}
-                          className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
-                      </div>
+        <div className="flex">
+            <div>
+                <Main products={products} onAdd={onAdd} onAdd2={onAdd2} ></Main>
+                <Basket  components={components} onAdd={onAdd} onAdd2={onAdd2} onRemove={onRemove} onCheckout={onCheckout}></Basket>
+                <div className="bg-secondary p-4 m-2 rounded-lg">
+                    <div className='pt-2 pb-2'>
+                        <input 
+                        type="text"
+                        required
+                        value={prodid}
+                        onChange={(e) => setprodid(e.target.value)}
+                        placeholder='Product ID'
+                        className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
+                    </div>
 
-                      <div className="col-span-6 sm:col-span-4">
-                        <label htmlFor="startdate" className="block text-sm font-medium text-text2" >Start Date</label>
-                        <input type="date"
-                          name="startdate"
-                          id="startdate"
-                          max={productRegisteration.enddate}
-                          required
-                          format="YYYY-MM-DD"
-                          value={productRegisteration.startdate}
-                          onChange={handleInput}
-                          className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
-                      </div>
-                      <div className="col-span-6 sm:col-span-4">
-                        <label htmlFor="enddate" className="block text-sm font-medium text-text2" >End Date</label>
-                        <input type="date"
-                          name="enddate"
-                          id="enddate"
-                          min={productRegisteration.startdate}
-                          required
-                          format="YYYY-MM-DD"
-                          value={productRegisteration.enddate}
-                          onChange={handleInput}
-                          className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
-                      </div>
-
-                      <div className="col-span-6 sm:col-span-4">
-                        <label htmlFor="quantity" className="block text-sm font-medium text-text2" >Quantity</label>
-                        <input type="number"
-                          name="quantity"
-                          id="quantity"
-                          required
-                          min= '0'
-                          value={productRegisteration.quantity}
-                          onChange={handleInput}
-                          className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
-                      </div>
-
-                      {/* <div className="col-span-6 sm:col-span-4">
-                        <label htmlFor="quantity" className="block text-sm font-medium text-text2" >Quantity</label>
-                        <input type="number"
-                          name="quantity"
-                          id="quantity"
-                          required
-                          min= '0'
-                          value={productRegisteration.quantity}
-                          onChange={handleInput}
-                          className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
-                      </div> */}
-                  </div>
-                </div>
-                  <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                    <button
-                      type="submit"
-                      className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-text1 bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    >
-                      Save
+                    <div className='pt-2 pb-2'>
+                        <input 
+                        required
+                        placeholder="Quantity"
+                        type="number"
+                        value={quantity}
+                        onChange={(e) => setQuantity(e.target.value)}
+                        className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
+                    </div>
+                    <hr/>
+                    <div className="flex justify-between">
+                    <button onClick={onCheckout}>
+                        Checkout
                     </button>
-                  </div>
+                    </div>
                 </div>
-              </form>
             </div>
-          </div>
         </div>
-        </>
     );
 }
 
-export default AddProduction
-
-
-  
+export default AddProduction;
