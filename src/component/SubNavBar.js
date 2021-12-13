@@ -1,5 +1,5 @@
 import React from "react";
-import {BsPeople, BsPersonPlus, BsBoxSeam, BsMinecartLoaded,BsHourglassSplit,BsCart} from "react-icons/bs";
+import {BsPeople, BsPersonPlus, BsBoxSeam, BsMinecartLoaded,BsHourglassSplit,BsCart, BsPlusCircle, BsDashCircle} from "react-icons/bs";
 import {MdOutlinePrecisionManufacturing} from "react-icons/md";
 import {AiOutlineEdit} from "react-icons/ai";
 import {VscNewFile} from "react-icons/vsc";
@@ -22,6 +22,7 @@ const SubNavBar = (props) =>{
             <>
             <NavLink to="/dashboard/stock/productlist" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsBoxSeam className="inline-block mr-4 "/></NavLink>
             <NavLink to="/dashboard/stock/rawmateriallist" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsMinecartLoaded className="inline-block mr-4 "/></NavLink>
+            <NavLink to="/dashboard/stock/addinventory" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsPlusCircle className="inline-block mr-4 "/></NavLink>
             </>:
             (type === 'sales') ?
             <>
