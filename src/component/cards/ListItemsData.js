@@ -14,13 +14,13 @@ let instance = axios.create({
 
 function UserListItemsData (props) {
   const {person} = props;
-  const [item,setItem] = useState({person})
-  const removeItem = () => {
-    setItem([]);
+  // const [item,setItem] = useState({person})
+  // const removeItem = () => {
+  //   setItem([]);
 
-  }
+  // }
 
-  const [staffid,setStaffid] = useState()
+  // const [staffid,setStaffid] = useState()
 
   const removeEmp = async () => {
       
@@ -37,9 +37,24 @@ function UserListItemsData (props) {
       catch (e) {
           console.log(e);
       }
-
-
   }
+
+  const removeCust = async () => {
+      
+    try {
+        let res = await instance.delete(`/api/customers/${person.custid}/`,
+            {
+                // headers: {
+                //     "Authorization": `Bearer ${localStorage.getItem('token')}`
+                // }
+            }
+        );
+        console.log(res);
+    }
+    catch (e) {
+        console.log(e);
+    }
+}
     
     return(
       <tr key={person.staffid}>
@@ -94,7 +109,7 @@ function UserListItemsData (props) {
           (props.type === "empl") ?
           <button className="hover:text-red-600" onClick={removeEmp}>Remove</button>:
           (props.type === "cust") ?
-          <button className="hover:text-red-600">Remove</button>:
+          <button className="hover:text-red-600" onClick={removeCust}>Remove</button>:
           (props.type === "supp") ?
           <button className="hover:text-red-600">Remove</button>:
           null

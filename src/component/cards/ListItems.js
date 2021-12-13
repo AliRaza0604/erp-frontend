@@ -23,14 +23,30 @@ const ListItems = (props) => {
                   </tr>
                 </thead>
                 {
-                  // (props.type === "user")?
+                  (props.type === "empl")?
+                  <>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {props.data?.map((person) => (
+                      <UserListItemsData key={person.staffid} person={person} type={props.type}/>
+                    ))}
+                  </tbody>
+                  </>:
+                  (props.type === "cust")?
+                  <>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {props.data?.map((person) => (
+                      <UserListItemsData key={person.custid} person={person} type={props.type}/>
+                    ))}
+                  </tbody>
+                  </>:
+                  (props.type === "supp")?
                   <>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {props.data?.map((person) => (
                       <UserListItemsData key={person.id} person={person} type={props.type}/>
                     ))}
                   </tbody>
-                  </>
+                  </>:null
                 }
               </table>
             </div>

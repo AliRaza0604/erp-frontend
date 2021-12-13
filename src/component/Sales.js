@@ -8,6 +8,8 @@ import Cart from "./cart/Cart"
 import ListItems from "./cards/ListItems";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import NewCart from "./newcart/NewCart";
+import AddCustomers from "./sales/AddCustomers";
 
 const data = [];
 for(let num = 30; num >= 0; num--){
@@ -54,8 +56,9 @@ const Sales = () => {
         {/* <Chart data={data}/> */}
         <Switch>
             <Route path="/dashboard/sales/customerslist" component={() => <ListItems type="cust" data={person} />}/>
+            <Route path="/dashboard/sales/addcustomer" component={AddCustomers}/>
             <Route path="/dashboard/sales/newinvoice" component={NewInvoice}/>
-            <Route path="/dashboard/sales/cart" component={Cart}/>
+            <Route path="/dashboard/sales/newcart" component={NewCart}/>
         </Switch>
       </>
     );

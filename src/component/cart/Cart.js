@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useReducer, useEffect } from "react";
 import ContextCart from "./ContextCart";
 import { reducer } from "./Reducer";
 
@@ -73,11 +73,12 @@ const product = [
 export const CartContext = createContext();
 
 const initialState = {
-    data: product,
+    data: JSON.parse(localStorage.getItem('cartItems')),
     totalAmount: 0,
 };
 
 const Cart = () => {
+    
 
     const [state, dispatch] = useReducer(reducer, initialState)
 
@@ -88,8 +89,24 @@ const Cart = () => {
         })
     };
 
+    const increment = (id) => {
+        return dispatch({
+          type: "INCREMENT",
+          payload: id,
+        });
+      };
+    
+      // decrement the item
+      const decrement = (id) => {
+        return dispatch({
+          type: "DECREMENT",
+          payload: id,
+        });
+      };
+
+
     return(
-        <CartContext.Provider value={{...state, removeItem}}>
+        <CartContext.Provider value={{...state, removeItem, increment, decrement}}>
             <ContextCart/>
         </CartContext.Provider>    
     );

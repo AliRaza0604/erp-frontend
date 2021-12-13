@@ -1,31 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { BsLightbulbFill} from 'react-icons/bs';
 import AvailableButton from '../forms/AvailableButton';
+import { CartdataContext } from '../Stock';
+
 
 
 
 
 const CardItems = (props) => {
 
+    // const {addtocart} = useContext(CartdataContext)
+
     const {data} = props;
-    const [cartItems,setCartItems] = useState([]);
-    const AddItem = (data) => {
-        if (cartItems.find((d) => d.id === data.id)) {
-            setCartItems(cartItems.map((x) => {
-                if (x.id === data.id) {
-                    return {
-                        ...x,
-                        qty: x.qty + 1
-                    };
-                } else {
-                    return x;
-                }
-            }));
-        } else {
-            setCartItems([...cartItems, data]);
-        }
-        console.log(data, cartItems);
-    };
+    // const [cartItems,setCartItems] = useState([]);
+    // const AddItem = (data) => {
+    //     if (cartItems.find((d) => d.id === data.id)) {
+    //         setCartItems(cartItems.map((x) => {
+    //             if (x.id === data.id) {
+    //                 return {
+    //                     ...x,
+    //                     qty: x.qty + 1
+    //                 };
+    //             } else {
+    //                 return x;
+    //             }
+    //         }));
+    //     } else {
+    //         setCartItems([...cartItems, data]);
+    //     }
+    //     console.log(data, cartItems);
+    // };
     
     return (
     <div className="m-1 w-62 p-3 border-2 border-gray-300 rounded-lg bg-white box-content flex flex-row">
@@ -42,13 +46,13 @@ const CardItems = (props) => {
                 (props.type === 'product') ?
                 <p className="text-lg text-primary">PKR<span className="mx-1 text-2xl">{data.price}</span>Rs/pc</p> :
                 (props.type === 'raw') ?
-                <p className="text-lg text-primary">PKR<span className="mx-1 text-2xl">{data.price}</span>Rs/pc</p>:null
+                <p className="text-lg text-primary"><span className="mx-1 text-2xl">{data.status}</span></p>:null
             }
             {
                 (props.type === 'product') ?
                 <p className="text-base text-text3" title="ProductName">{data.name}</p> :
                 (props.type === 'raw') ?
-                <p className="text-base text-text3" title="ProductName">{data.itemname}</p> : null
+                <p className="text-base text-text3" title="ProductName">{data.startdate}</p> : null
             }
             {
                 (props.type === 'product') ?
@@ -57,7 +61,7 @@ const CardItems = (props) => {
                 </div> :
                 (props.type === 'raw') ?
                 <div className="flex flex-row">
-                    <span className="text-base text-secondary">{data.description}</span>
+                    <span className="text-base text-secondary">{data.enddate}</span>
                 </div> : null
             }
             {
@@ -66,8 +70,9 @@ const CardItems = (props) => {
                     <AvailableButton available={data.quantity}/>
                 </div>:
                 (props.type === 'raw') ?
-                <div>
-                    <AvailableButton available={data.quantity}/>
+                <div className="mb-2 flex flex-row">
+                    <label className="mr-2 w-20 text-text3 text-sm" >Quantity</label>
+                    <input disabled className="h-6 w-20 text-center border-2 border-primary font-semibold text-sm text-text3 rounded-md flex items-center " value={data.quantity}/>
                 </div>:null
 
             }
@@ -75,7 +80,7 @@ const CardItems = (props) => {
             {
                 (props.type === 'product') ?
                 <>
-                    <button id={`product`+props.id} className="ml-4 px-4 border-2 border-primary rounded-md bg-primary text-text1" onClick={() => AddItem(data)} >Add To Cart</button>
+                    <button id={`product`+props.id} className="ml-4 px-4 border-2 border-primary rounded-md bg-primary text-text1"  >Add To Cart</button>
                 </>:null
                 
             }

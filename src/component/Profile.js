@@ -1,35 +1,64 @@
-import React from "react"
+import React from "react";
 import { useState, useEffect } from "react"
 import axios from "axios";
 
 let instance = axios.create({
     baseURL: 'https://ssm-erp-backend.herokuapp.com',
     headers: {
-        post: {
+        put: {
+            'Content-Type': 'application/json'
+        },
+        get: {
             'Content-Type': 'application/json'
         }
     }
 })
 
-export default function AddEmployee() {
+
+
+const Profile = () => {
+
+    const [username, setusername] = useState(localStorage.getItem('username'));
+
+    const [password, setpassword] = useState();
+    
+    useEffect (async() => {
+        try {
+            let res = await instance.get(`/api/staff/username/${username}/`);
+            console.log(res)
+            setStaffid(res.data[0].staffid)
+            setemployeeRegisteration({
+                firstname: res.data[0].firstname,
+                lastname: res.data[0].lastname,
+                email: res.data[0].email,
+                phonenum: res.data[0].phonenum,
+                cnic: res.data[0].cnic,
+                address: res.data[0].address,
+                city: res.data[0].city,
+                province: res.data[0].province,
+                country: res.data[0].country,
+                zipcode: res.data[0].zipcode,
+            });
+        }
+
+        catch (e) {
+                alert("Invalid data!");
+                // elementButton.classList.add('bg-purple-800', 'hover:bg-purple-600', 'hover:shadow-md');
+                // elementButton.classList.remove('bg-gray-400', 'pointer-events-none');
+        }
+    },[])
 
     const [employeeRegisteration, setemployeeRegisteration] = useState({
         firstname: "",
         lastname: "",
-        joindate: "",
-        dob: "",
-        salary: "",
         email: "",
         phonenum:"",
         cnic: "",
         address: "",
         city: "",
         province: "",
-        country: "Pakistan",
+        country: "",
         zipcode: "",
-        depid: 3,
-        username: "",
-        password: "",
     });
 
     const handleInput = (e) => {
@@ -39,18 +68,42 @@ export default function AddEmployee() {
         setemployeeRegisteration({...employeeRegisteration, [name] : value})
     }
 
+    const [staffid,setStaffid] = useState();
+
+    const handleChangePassword = async (e) => {
+        
+      
+
+      try {
+          let res = await instance.put(`/api/staff/${staffid}/changepwd/`,
+          {
+              password
+          })
+
+          console.log(res)
+      }
+
+      catch (e) {
+              alert("Invalid data!");
+              // elementButton.classList.add('bg-purple-800', 'hover:bg-purple-600', 'hover:shadow-md');
+              // elementButton.classList.remove('bg-gray-400', 'pointer-events-none');
+      }
+
+      setpassword('');
+
+  }
+    
+
     const handleSubmit = async (e) => {
         //send to backend from here
         e.preventDefault();
+
         console.log(employeeRegisteration)
 
         try {
-          let res = await instance.post('/api/staff/', {
+          let res = await instance.put(`/api/staff/${staffid}/`, {
               "firstname":employeeRegisteration.firstname,
               "lastname":employeeRegisteration.lastname,
-              "joindate":employeeRegisteration.joindate,
-              "dob":employeeRegisteration.dob,
-              "salary":employeeRegisteration.salary,
               "email":employeeRegisteration.email,
               "phonenum":employeeRegisteration.phonenum,
               "cnic":employeeRegisteration.cnic,
@@ -59,41 +112,20 @@ export default function AddEmployee() {
               "province":employeeRegisteration.province,
               "country":employeeRegisteration.country,
               "zipcode":employeeRegisteration.zipcode,
-              "depid":employeeRegisteration.depid,
-              "username":employeeRegisteration.username,
-              "password":employeeRegisteration.password,
           })
-          console.log(res);
+
+          
       }
       catch (e) {
           alert("Invalid data!");
-
       }
 
-
-        setemployeeRegisteration({
-          firstname: "",
-          lastname: "",
-          joindate: "",
-          dob: "",
-          salary: "",
-          email: "",
-          phonenum:"",
-          cnic: "",
-          address: "",
-          city: "",
-          province: "",
-          country: "Pakistan",
-          zipcode: "",
-          depid: 3,
-          username: "",
-          password: "",
-      });
     }
 
-    return (
-      <>
-        <div>
+
+    return(
+    <>
+    <div>
           <div className="md:grid md:grid-cols-3 md:gap-6">
             <div className="md:col-span-1">
               <div className="px-4 sm:px-0">
@@ -108,13 +140,33 @@ export default function AddEmployee() {
                 <div className="shadow sm:rounded-md sm:overflow-hidden">
                   <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                     <div className="grid grid-cols-6 gap-6">
+
+                    <div className="col-span-6 sm:col-span-6">
+                        <label className="block text-sm font-medium text-text2" >Change Password</label>
+                        <input type="password"
+                          name="password"
+                          id="password"
+                          autoComplete="password"
+                          placeholder="Enter password"
+                          onChange={(e) => setpassword(e.target.value)}
+                          className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md "/>
+                        </div>
+                        <div className="col-span-6 sm:col-span-6">
+                        <button
+                        className="inline-flex w-full justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-text1 bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        onClick={handleChangePassword}
+                        >
+                        Change
+                        </button>
+                        </div>
+                        
                       <div className="col-span-6 sm:col-span-3">
                         <label htmlFor="first-name" className="block text-sm font-medium text-text2" >First Name</label>
                         <input type="text"
                           name="firstname"
                           id="firstname"
                           autoComplete="given-name"
-                          required
+                          disabled
                           value={employeeRegisteration.firstname}
                           onChange={handleInput}
                           className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
@@ -125,172 +177,63 @@ export default function AddEmployee() {
                           name="lastname"
                           id="lastname"
                           autoComplete="family-name"
-                          required
+                          disabled
                           value={employeeRegisteration.lastname}
                           onChange={handleInput}
                           className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
                       </div>
-
-                      <div className="col-span-6 sm:col-span-4">
-                        <label htmlFor="user-name" className="block text-sm font-medium text-text2" >Username</label>
-                        <input type="text"
-                          name="username"
-                          id="username"
-                          required
-                          value={employeeRegisteration.username}
-                          onChange={handleInput}
-                          className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
-                      </div>
-
-                      <div className="col-span-6 sm:col-span-4">
-                        <label htmlFor="password" className="block text-sm font-medium text-text2" >Password</label>
-                        <input type="password"
-                          name="password"
-                          id="password"
-                          required
-                          value={employeeRegisteration.password}
-                          onChange={handleInput}
-                          className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
-                      </div>
   
-                      <div className="col-span-6 sm:col-span-4">
+                      <div className="col-span-6 sm:col-span-6">
                         <label htmlFor="email" className="block text-sm font-medium text-text2" >Email</label>
                         <input type="email"
                           name="email"
                           id="email"
-                          required
                           value={employeeRegisteration.email}
                           onChange={handleInput}
                           className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
                       </div>
 
-                      {/* <div className="col-span-6 sm:col-span-3">
-                        <label htmlFor="gender" className="block text-sm font-medium text-text2">
-                          Gender
-                        </label>
-                        <select
-                          name="gender" 
-                          id="gender"
-                          value={employeeRegisteration.gender}
-                          onChange={handleInput}
-                          className="mt-1 block w-full py-2 px-3 border border-secondary bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
-                        >
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
-                          <option value="other">Other</option>
-                        </select>
-                      </div> */}
-
-                      <div className="col-span-6 sm:col-span-4">
-                        <label htmlFor="dob" className="block text-sm font-medium text-text2" >Date of Birth</label>
-                        <input type="date"
-                          name="dob"
-                          id="dob"
-                          required
-                          format="YYYY-MM-DD"
-                          value={employeeRegisteration.dob}
-                          onChange={handleInput}
-                          className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
-                      </div>
-
                       {/* <div className="col-span-6 sm:col-span-4">
-                        <label htmlFor="country" className="block text-sm font-medium text-text2">
-                          Contact Number
-                        </label>
-                        <PhoneInput placeholder="Enter phone number"
-                          country="PK"
-                          value={employeeRegisteration.phone}
+                        <label htmlFor="password" className="block text-sm font-medium text-text2" >Change Password</label>
+                        <input type="password"
+                          name="password"
+                          id="password"
+                          value={employeeRegisteration.password}
                           onChange={handleInput}
                           className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
                       </div> */}
 
-                      <div className="col-span-6 sm:col-span-4">
+                      <div className="col-span-6 sm:col-span-6">
                         <label htmlFor="phonenum" className="block text-sm font-medium text-text2" >Phone Number</label>
                         <input type="number"
                           placeholder="03XX-XXXXXXX"
                           min="0"
                           name="phonenum"
                           id="phonenum"
-                          required
                           value={employeeRegisteration.phonenum}
                           onChange={handleInput}
                           className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
                       </div>
 
-                      <div className="col-span-6 sm:col-span-4">
+                      <div className="col-span-6 sm:col-span-6">
                         <label htmlFor="cnic" className="block text-sm font-medium text-text2" >ID Number</label>
                         <input type="text"
                           name="cnic"
                           id="cnic"
-                          required
+                          disabled
                           value={employeeRegisteration.cnic}
                           onChange={handleInput}
                           className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
                       </div>
-
-                      <div className="col-span-6 sm:col-span-4">
-                        <label htmlFor="depid" className="block text-sm font-medium text-text2">
-                          Job Title
-                        </label>
-                        <select
-                          id="depid"
-                          name="depid"
-                          value={employeeRegisteration.depid}
-                          onChange={handleInput}
-                          className="mt-1 block w-full py-2 px-3 border border-secondary bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
-                        >
-                          <option value={2}>Member of Finance Dept</option>
-                          <option value={4}>Member of Collection Dept</option>
-                          <option value={1}>Member of Sales Dept</option>
-                          <option value={3}>Member of Purchase Dept</option>
-                          <option value={5}>Member of Production Dept</option>
-                        </select>
-                      </div>
-
-                      <div className="col-span-6 sm:col-span-4">
-                        <label htmlFor="salary" className="block text-sm font-medium text-text2" >Salary</label>
-                        <input type='number'
-                          min="0"
-                          name="salary"
-                          id="salary"
-                          required
-                          value={employeeRegisteration.salary}
-                          onChange={handleInput}
-                          className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
-                      </div>
-
-                      <div className="col-span-6 sm:col-span-4">
-                        <label htmlFor="joindate" className="block text-sm font-medium text-text2" >Date of Joining</label>
-                        <input type="date"
-                          name="joindate"
-                          id="joindate"
-                          required
-                          format="YYYY-MM-DD"
-                          value={employeeRegisteration.joindate}
-                          onChange={handleInput}
-                          className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
-                      </div>
-
-                      {/* <div className="col-span-6 sm:col-span-4">
-                        <label htmlFor="bankno" className="block text-sm font-medium text-text2" >Bank Account Number</label>
-                        <input type="number"
-                          placeholder="XXXXXXXXX"
-                          min="0"
-                          name="bankno"
-                          id="bankno"
-                          required
-                          value={employeeRegisteration.bankno}
-                          onChange={handleInput}
-                          className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
-                      </div> */}
   
-                      <div className="col-span-6 sm:col-span-3">
+                      <div className="col-span-6 sm:col-span-6">
                         <label htmlFor="country" className="block text-sm font-medium text-text2">
                           Country
                         </label>
                         <select
                           id="country"
                           name="country"
+                          disabled
                           value={employeeRegisteration.country}
                           onChange={handleInput}
                           autoComplete="country"
@@ -341,25 +284,7 @@ export default function AddEmployee() {
                           className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
                       </div>
                   </div>
-                  {/* <div>
-                    <label className="block text-sm font-medium text-text2">Photo</label>
-                      <div className="mt-1 flex items-center">
-                        <span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                          <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                          </svg>
-                        </span>
-                        <input
-                          type="button"
-                          type="file" 
-                          value={employeeRegisteration.image} 
-                          onChange={handleInput} 
-                          name="image" 
-                          id="image"
-                          className="ml-5 bg-white py-2 px-3 border border-secondary rounded-md shadow-sm text-sm leading-4 font-medium text-text2 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-                        />
-                      </div>
-                  </div> */}
+
                 </div>
                   <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                     <button
@@ -376,7 +301,9 @@ export default function AddEmployee() {
             </div>
           </div>
         </div>
-      </>
-    )
-  }
-  
+
+    </>
+    );
+}
+
+export default Profile

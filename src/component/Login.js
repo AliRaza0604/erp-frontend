@@ -21,6 +21,7 @@ export default function Login() {
   const [username, setusername] = useState('');
   const [password, setpassword] = useState('');
   const [depid, setdepid] = useState();
+  const [staffid, setstaffid] = useState();
   const [loggedIn, setloggedIn] = useState(false);
   const [token, settoken] = useState('');
   const [pk,setpk] = useState('');
@@ -50,6 +51,7 @@ export default function Login() {
         // settype(res.data.role);
         // setusername(res.data.username);
         setdepid(res.data[0].depid);
+        setstaffid(res.data[0].staffid);
         console.log(res);
 
 
@@ -69,7 +71,8 @@ export default function Login() {
     localStorage.setItem('username', username);
     localStorage.setItem('depid', depid);
     localStorage.setItem('pk', pk);
-  }, [loggedIn, token, username, depid, pk])
+    localStorage.setItem('staffid', staffid);
+  }, [loggedIn, token, username, depid, pk, staffid])
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-secondary py-12 px-4 sm:px-6 lg:px-8">

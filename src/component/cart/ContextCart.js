@@ -17,8 +17,8 @@ const ContextCart = () => {
                 <h1 className="text-xl px-3 py-4 font-bold text-gray-600">Shopping Cart</h1>
                 <div className="px-10">
                     <div className="h-100 w-140 px-10 py-8 bg-secondary rounded-xl overflow-y-scroll grid grid-cols-1 grid-rows-1 gap-x-1 gap-y-1 auto-rows-auto grid-flow-row">
-                        {data.map((curData) => (
-                            <CartItems key={curData.id} {...curData}/>
+                        {data?.map((curData) => (
+                            <CartItems key={curData.propid} {...curData}/>
                             ))} 
                     </div>
                 </div>
