@@ -1,15 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Chart from "./sales/Chart";
 import { subDays} from "date-fns";
 import SubNavBar from "./SubNavBar";
-import NewInvoice from "./sales/NewInvoice";
 import { Route, Switch } from "react-router";
-import Cart from "./cart/Cart"
 import ListItems from "./cards/ListItems";
 import axios from "axios";
-import { useState, useEffect } from "react";
 import NewCart from "./newcart/NewCart";
 import AddCustomers from "./sales/AddCustomers";
+import Invoicelist from "./sales/Invoicelist";
 
 const data = [];
 for(let num = 30; num >= 0; num--){
@@ -32,6 +30,7 @@ let instance = axios.create({
 const Sales = () => {
 
   const [person,setPerson] = useState();
+  const [invoicedata,setInvoicedata] = useState();
     
     useEffect (async () => {
         try {
@@ -44,6 +43,14 @@ const Sales = () => {
             );
             console.log(res);
             setPerson(res.data);
+
+            res = await instance.get('/api/invoices',
+            {
+
+            }
+            );
+            console.log(res);
+            setInvoicedata(res.data);
         }
         catch (e) {
             console.log(e);
@@ -57,7 +64,7 @@ const Sales = () => {
         <Switch>
             <Route path="/dashboard/sales/customerslist" component={() => <ListItems type="cust" data={person} />}/>
             <Route path="/dashboard/sales/addcustomer" component={AddCustomers}/>
-            <Route path="/dashboard/sales/newinvoice" component={NewInvoice}/>
+            <Route path="/dashboard/sales/invoicelist" component={() => <Invoicelist data={invoicedata}/>}/>
             <Route path="/dashboard/sales/newcart" component={NewCart}/>
         </Switch>
       </>

@@ -1,146 +1,188 @@
 import React from "react"
-import InputField from "../forms/InputField"
-import PhoneInput from 'react-phone-number-input/input'
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import axios from "axios";
+
+let instance = axios.create({
+    baseURL: 'https://ssm-erp-backend.herokuapp.com',
+    headers: {
+        post: {
+            'Content-Type': 'application/json'
+        }
+    }
+})
 
 export default function AddSuppliers() {
-  const [value, setValue] = useState()
+    const [supplierRegisteration, setsupplierRegisteration] = useState({
+        name: "",
+        contactperson: "",
+        phonenum:"",
+        address: "",
+        city: "",
+        province: "",
+        country: "Pakistan",
+        zipcode: "",
+    });
+
+  const handleInput = (e) => {
+      const name = e.target.name;
+      const value = e.target.value;
+
+      setsupplierRegisteration({...supplierRegisteration, [name] : value})
+  }
+
+  const handleSubmit = async (e) => {
+      //send to backend from here
+      e.preventDefault();
+      console.log(supplierRegisteration)
+
+      try {
+        let res = await instance.post('/api/suppliers/', {
+            "name":supplierRegisteration.name,
+            "contactperson":supplierRegisteration.contactperson,
+            "phonenum":supplierRegisteration.phonenum,
+            "address":supplierRegisteration.address,
+            "city":supplierRegisteration.city,
+            "province":supplierRegisteration.province,
+            "country":supplierRegisteration.country,
+            "zipcode":supplierRegisteration.zipcode,
+        })
+        console.log(res);
+    }
+    catch (e) {
+        alert("Invalid data!");
+
+    }
+
+
+      setsupplierRegisteration({
+        name: "",
+        contactperson: "",
+        phonenum:"",
+        address: "",
+        city: "",
+        province: "",
+        country: "Pakistan",
+        zipcode: "",
+    });
+  }
     return (
       <>
         <div>
           <div className="md:grid md:grid-cols-3 md:gap-6">
             <div className="md:col-span-1">
               <div className="px-4 sm:px-0">
-                <h3 className="text-lg font-medium pl-2 leading-6 text-text2">Supplier Details</h3>
-                {/* <p className="mt-1 text-sm pl-2 text-text3">
+                <h3 className="text-lg font-medium pl-2 leading-6 text-text2">Add Supplier</h3>
+                <p className="mt-1 text-sm pl-2 text-text3">
                   This information will be displayed publicly so be careful what you share.
-                </p> */}
+                </p>
               </div>
             </div>
             <div className="mt-5 md:mt-0 md:col-span-2">
-              <form action="#" method="POST">
+              <form action="" onSubmit={handleSubmit}>
                 <div className="shadow sm:rounded-md sm:overflow-hidden">
                   <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                     <div className="grid grid-cols-6 gap-6">
-
-                      {/* <div className="col-span-6 sm:col-span-4">
-                        <label className="block text-sm font-medium text-primary">Product Details</label>
-                      </div>
-                    
-                      <div className="col-span-6 sm:col-span-4">
-                        <InputField type="text"
-                          name="product"
-                          id="product"
-                          htmlFor="product"
-                          label="Product Name"
-                        />
-                      </div>
-
-                      <div className="col-span-6 sm:col-span-4">
-                        <InputField type="number"
-                          min="0"
-                          name="rate"
-                          id="rate"
-                          htmlFor="rate"
-                          label="Rate"
-                        />
-                      </div>
-
-                      <div className="col-span-6 sm:col-span-4">
-                          <label className="block text-sm font-medium text-primary"> Supplier Details</label>
-                      </div> */}
-
-                      <div className="col-span-6 sm:col-span-3">
-                        <InputField type="text"
-                          name="first-name"
-                          id="first-name"
+                      <div className="col-span-6 sm:col-span-6">
+                        <label htmlFor="name" className="block text-sm font-medium text-text2" >Shop Name</label>
+                        <input type="text"
+                          name="name"
+                          id="name"
                           autoComplete="given-name"
-                          htmlFor="first-name"
-                          label="First name"/>
+                          required
+                          value={supplierRegisteration.name}
+                          onChange={handleInput}
+                          className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
                       </div>
-  
-                      <div className="col-span-6 sm:col-span-3">
-                        <InputField type="text"
-                          name="last-name"
-                          id="last-name"
-                          autoComplete="family-name"
-                          htmlFor="last-name"
-                          label="Last name"/>
-                      </div>
-  
-                      <div className="col-span-6 sm:col-span-4">
-                        <InputField type="text"
-                          name="email-address"
-                          id="email-address"
-                          autoComplete="email"
-                          htmlFor="email-address"
-                          label="Email address"/>
-                      </div>
-
-                      <div className="col-span-6 sm:col-span-4">
-                        <label htmlFor="country" className="block text-sm font-medium text-text2">
-                          Contact Number
-                        </label>
-                        <PhoneInput placeholder="Enter phone number"
-                          country="PK"
-                          value={value}
-                          onChange={setValue}
+                      <div className="col-span-6 sm:col-span-6">
+                        <label htmlFor="contactperson" className="block text-sm font-medium text-text2" >Contact Person</label>
+                        <input type="text"
+                          name="contactperson"
+                          id="contactperson"
+                          autoComplete="contactperson"
+                          required
+                          value={supplierRegisteration.contactperson}
+                          onChange={handleInput}
                           className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
                       </div>
 
-                      <div className="col-span-6 sm:col-span-3">
+                      <div className="col-span-6 sm:col-span-6">
+                        <label htmlFor="phonenum" className="block text-sm font-medium text-text2" >Phone Number</label>
+                        <input type="text"
+                          placeholder="03XX-XXXXXXX"
+                          min="0"
+                          name="phonenum"
+                          id="phonenum"
+                          required
+                          value={supplierRegisteration.phonenum}
+                          onChange={handleInput}
+                          className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
+                      </div>
+  
+                      <div className="col-span-6 sm:col-span-6">
                         <label htmlFor="country" className="block text-sm font-medium text-text2">
                           Country
                         </label>
                         <select
                           id="country"
                           name="country"
+                          value={supplierRegisteration.country}
+                          onChange={handleInput}
                           autoComplete="country"
                           className="mt-1 block w-full py-2 px-3 border border-secondary bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                         >
-                          <option>Pakistan</option>
+                          <option value="Pakistan">Pakistan</option>
                         </select>
                       </div>
   
                       <div className="col-span-6">
-                        <InputField type="text"
-                          name="street-address"
-                          id="street-address"
-                          autoComplete="street-address"
-                          htmlFor="street-address"
-                          label="Street address"/>
+                        <label htmlFor="address" className="block text-sm font-medium text-text2" >Street address</label>
+                        <input type="text"
+                          name="address"
+                          id="address"
+                          autoComplete="address"
+                          value={supplierRegisteration.address}
+                          onChange={handleInput}
+                          className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
                       </div>
   
                       <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-                        <InputField type="text"
+                        <label htmlFor="city" className="block text-sm font-medium text-text2" >City</label>
+                        <input type="text"
                           name="city"
                           id="city"
-                          htmlFor="city"
-                          label="City"/>
+                          value={supplierRegisteration.city}
+                          onChange={handleInput}
+                          className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
                       </div>
   
                       <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                        <InputField type="text"
-                          name="state"
-                          id="state"
-                          htmlFor="state"
-                          label="State / Province"/>
+                        <label htmlFor="province" className="block text-sm font-medium text-text2" >Province</label>
+                        <input type="text"
+                          name="province"
+                          id="province"
+                          value={supplierRegisteration.province}
+                          onChange={handleInput}
+                          className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
                       </div>
   
                       <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                        <InputField type="text"
-                          name="postal-code"
-                          id="postal-code"
-                          autoComplete="postal-code"
-                          htmlFor="postal-code"
-                          label="Zip / Postal"/>
+                        <label htmlFor="zipcode" className="block text-sm font-medium text-text2" >zipcode / Postal Code</label>
+                        <input type="text"
+                          name="zipcode"
+                          id="zipcode"
+                          value={supplierRegisteration.zipcode}
+                          onChange={handleInput}
+                          className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
                       </div>
                   </div>
+                 
                 </div>
                   <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                     <button
                       type="submit"
+                      id="register"
                       className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-text1 bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+
                     >
                       Save
                     </button>

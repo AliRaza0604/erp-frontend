@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 export default function Basket(props) {
-  const { cartItems, onAdd, onAdd2, onRemove, onCheckout } = props;
-  const itemsPrice = cartItems.reduce((a, c) => a + c.quantity * c.price, 0);
+  const { invoice_items, onAdd, onRemove} = props;
+  const itemsPrice = invoice_items.reduce((a, c) => a + c.quantity * c.price, 0);
 
   // const taxPrice = itemsPrice * 0.14;
   // const shippingPrice = itemsPrice > 2000 ? 0 : 20;
@@ -11,15 +11,15 @@ export default function Basket(props) {
     <aside className="bg-secondary p-4 m-2 rounded-lg">
       <h2>Cart Items</h2>
       <div>
-        {cartItems.length === 0 && <div>Cart is empty</div>}
-        {cartItems.map((item) => (
+        {invoice_items.length === 0 && <div>Cart is empty</div>}
+        {invoice_items.map((item) => (
           <div key={item.prodid} className="flex justify-between">
             <div>{item.name}</div>
             <div>
               <button onClick={() => onRemove(item)} className="bg-red-600 w-6">
                 -
               </button>{' '}
-              <button onClick={() => {onAdd(item); onAdd2(item)}} className="bg-green-700 w-6">
+              <button onClick={() => onAdd(item)} className="bg-green-700 w-6">
                 +
               </button>
             </div>
@@ -30,7 +30,7 @@ export default function Basket(props) {
           </div>
         ))}
 
-        {cartItems.length !== 0 && (
+        {invoice_items.length !== 0 && (
           <>
             <hr></hr>
             <div className="flex justify-between">

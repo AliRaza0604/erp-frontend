@@ -91,13 +91,13 @@ const AddProduction = () => {
     };
 
     const onCheckout = async () => {
-        console.log(components)
+        // console.log(components)
         // console.log(localStorage.getItem('staffid'))
-        console.log(prodid)
+        // console.log(prodid)
         // console.log(duedate)
-        console.log(staffid)
-        console.log(startdate)
-        console.log(quantity)
+        // console.log(staffid)
+        // console.log(startdate)
+        // console.log(quantity)
         // console.log(collectorid)
 
         try {
@@ -125,8 +125,8 @@ const AddProduction = () => {
     return(
         <div className="flex">
             <div>
-                <Main products={products} onAdd={onAdd} onAdd2={onAdd2} ></Main>
-                <Basket  components={components} onAdd={onAdd} onAdd2={onAdd2} onRemove={onRemove} onCheckout={onCheckout}></Basket>
+                <Main products={products} onAdd={onAdd} ></Main>
+                <Basket  components={components} onAdd={onAdd} onRemove={onRemove} onCheckout={onCheckout}></Basket>
                 <div className="bg-secondary p-4 m-2 rounded-lg">
                     <div className='pt-2 pb-2'>
                         <input 

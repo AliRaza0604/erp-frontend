@@ -43,7 +43,7 @@ const ListItems = (props) => {
                   <>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {props.data?.map((person) => (
-                      <UserListItemsData key={person.id} person={person} type={props.type}/>
+                      <UserListItemsData key={person.supplierid} person={person} type={props.type}/>
                     ))}
                   </tbody>
                   </>:null

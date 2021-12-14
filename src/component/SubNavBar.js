@@ -1,8 +1,7 @@
 import React from "react";
-import {BsPeople, BsPersonPlus, BsBoxSeam, BsMinecartLoaded,BsHourglassSplit,BsCart, BsPlusCircle, BsDashCircle} from "react-icons/bs";
+import {BsPeople, BsPersonPlus, BsBoxSeam, BsMinecartLoaded,BsHourglassSplit,BsCart, BsPlusCircle, BsFileEarmark} from "react-icons/bs";
 import {MdOutlinePrecisionManufacturing} from "react-icons/md";
 import {AiOutlineEdit} from "react-icons/ai";
-import {VscNewFile} from "react-icons/vsc";
 import {NavLink} from "react-router-dom";
 
 
@@ -28,7 +27,7 @@ const SubNavBar = (props) =>{
             <>
             <NavLink to="/dashboard/sales/customerslist" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsPeople className="inline-block mr-4 "/></NavLink>
             <NavLink to="/dashboard/sales/addcustomer" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsPersonPlus className="inline-block mr-4 "/></NavLink>
-            <NavLink to="/dashboard/sales/newinvoice" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><VscNewFile className="inline-block mr-4 "/></NavLink>
+            <NavLink to="/dashboard/sales/invoicelist" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsFileEarmark className="inline-block mr-4 "/></NavLink>
             <NavLink to="/dashboard/sales/newcart" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsCart className="inline-block mr-4 "/></NavLink>
             </>:
             (type === 'production') ?

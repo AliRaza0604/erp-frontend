@@ -57,7 +57,7 @@ const Stock = () => {
         <>
             <SubNavBar type="stock"/>
             <Switch>
-                <Route path="/dashboard/stock/productlist" component={() =><ProductList data1={product}/>}/>
+                <Route path="/dashboard/stock/productlist" component={() =><ProductList data={product}/>}/>
                 <Route path="/dashboard/stock/rawmateriallist" component={() => <RawMaterialList data={raw}/>}/>
                 <Route path="/dashboard/stock/addinventory" component={AddInventory}/>
             </Switch>

@@ -2,7 +2,7 @@ import React from 'react';
 import { BsLightbulbFill} from 'react-icons/bs';;
 
 export default function Product(props) {
-  const { product, onAdd, onAdd2 } = props;
+  const { product, onAdd } = props;
   return (
     <div className="m-1 w-62 p-3 border-2 border-gray-300 rounded-lg bg-white box-content flex flex-row">
         <div className="w-20 h-36 mr-3 rounded-lg bg-white grid place-content-center">
@@ -15,7 +15,7 @@ export default function Product(props) {
                     <span className="text-base text-secondary">{product.description}</span>
                 </div>
             <div className="flex flex-row justify-end">
-                <button id={`product`+props.id} className="ml-4 px-4 border-2 border-primary rounded-md bg-primary text-text1" onClick={() => {onAdd(product); onAdd2(product)}}  >Add To Cart</button>
+                <button id={`product`+props.id} className="ml-4 px-4 border-2 border-primary rounded-md bg-primary text-text1" onClick={() => onAdd(product)}  >Add To Cart</button>
             </div>
         </div>
     </div>

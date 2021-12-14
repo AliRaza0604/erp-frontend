@@ -8,6 +8,9 @@ let instance = axios.create({
     headers: {
         get: {
             'Content-Type': 'application/json'
+        },
+        post: {
+            'Content-Type': 'application/json'
         }
     }
 })
@@ -17,10 +20,11 @@ const NewCart = () => {
     var today = new Date(),
     date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
-    const [accid, setAccid] = useState();
-    const [duedate, setDuedate] = useState();
-    const [curdate, setCurdate] = useState(date);
+    const [accid, setAccid] = useState('');
+    const [duedate, setDuedate] = useState('');
+    const [creationdate, setcreationdate] = useState(date);
     const [collectorid, setCollectorid] = useState('null');
+    const [salesmanid, setsalesmanid] = useState(localStorage.getItem('staffid'));
 
 
     useEffect (async () => {
@@ -42,63 +46,71 @@ const NewCart = () => {
 
     const [products,setProducts] = useState();
     // const {products} = data;
-    const [cartItems, setCartItems] = useState([]);
+    const [invoice_items, setinvoice_items] = useState([]);
 
     const onAdd = (product) => {
-        const exist = cartItems.find((x) => x.prodid === product.prodid);
+        const exist = invoice_items.find((x) => x.prodid === product.prodid);
         if (exist) {
-        setCartItems(
-            cartItems.map((x) =>
-            x.prodid === product.prodid ? { ...exist, quantity: exist.quantity + 1 } : x
+        setinvoice_items(
+            invoice_items.map((x) =>
+            x.prodid === product.prodid ? { ...exist, "quantity": exist.quantity + 1 } : x
             )
         );
         } else {
-        setCartItems([...cartItems, { ...product, quantity: 1 }]);
+        setinvoice_items([...invoice_items, { ...product, "quantity": 1 }]);
         }
     };
    
 
-    const onAdd2 = (product) => {
-        const exist = cartItems.find((x) => x.prodid === product.prodid);
-        if (exist) {
-        setCartItems(
-            cartItems.map((x) =>
-            x.prodid === product.prodid ? { ...exist, amount: exist.amount + exist.price } : x
-            )
-        );
-        } else {
-        setCartItems([...cartItems, { ...product, amount: exist.price }]);
-        }
-    };
-
 
     const onRemove = (product) => {
-        const exist = cartItems.find((x) => x.prodid === product.prodid);
+        const exist = invoice_items.find((x) => x.prodid === product.prodid);
         if (exist.quantity === 1) {
-        setCartItems(cartItems.filter((x) => x.prodid !== product.prodid));
+        setinvoice_items(invoice_items.filter((x) => x.prodid !== product.prodid));
         } else {
-        setCartItems(
-            cartItems.map((x) =>
+        setinvoice_items(
+            invoice_items.map((x) =>
             x.prodid === product.prodid ? { ...exist, quantity: exist.quantity - 1 } : x
             )
         );
         }
     };
 
-    const onCheckout = () => {
-        console.log(cartItems)
+    const onCheckout = async () => {
+        console.log(invoice_items)
         console.log(localStorage.getItem('staffid'))
         console.log(accid)
         console.log(duedate)
-        console.log(curdate)
+        console.log(creationdate)
         console.log(collectorid)
+
+        try {
+            let res = await instance.post('/api/invoices/',
+                {
+                    // headers: {
+                    //     "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    // }
+  
+                    "duedate":duedate,
+                    "creationdate":creationdate,
+                    "salesmanid":salesmanid,
+                    "accid":accid,
+                    "collectorid":collectorid,
+                    "invoice_items":invoice_items
+                }
+            );
+            console.log(res);
+          }
+          catch (e) {
+              console.log(e);
+          }
     }
 
     return(
         <div className="flex">
             <div>
-                <Main products={products} onAdd={onAdd} onAdd2={onAdd2} ></Main>
-                <Basket  cartItems={cartItems} onAdd={onAdd} onAdd2={onAdd2} onRemove={onRemove} onCheckout={onCheckout}></Basket>
+                <Main products={products} onAdd={onAdd} ></Main>
+                <Basket  invoice_items={invoice_items} onAdd={onAdd} onRemove={onRemove} onCheckout={onCheckout}></Basket>
                 <div className="bg-secondary p-4 m-2 rounded-lg">
                     <div className='pt-2 pb-2'>
                         <input 
