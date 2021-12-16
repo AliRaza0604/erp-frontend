@@ -21,6 +21,8 @@ let instance = axios.create({
 
 const Stock = () => {
 
+    const depid = localStorage.getItem('depid');
+
     const [raw,setRaw] = useState();
     const [product,setProduct] = useState();
     
@@ -55,12 +57,38 @@ const Stock = () => {
 
     return(
         <>
-            <SubNavBar type="stock"/>
-            <Switch>
-                <Route path="/dashboard/stock/productlist" component={() =><ProductList data={product}/>}/>
-                <Route path="/dashboard/stock/rawmateriallist" component={() => <RawMaterialList data={raw}/>}/>
-                <Route path="/dashboard/stock/addinventory" component={AddInventory}/>
-            </Switch>
+            {
+                (depid === '1') ?
+                <> 
+                    <SubNavBar type="stock"/>
+                    <Switch>
+                        <Route path="/dashboard/stock/productlist" component={() =><ProductList data={product}/>}/>
+                        <Route path="/dashboard/stock/rawmateriallist" component={() => <RawMaterialList data={raw}/>}/>
+                        <Route path="/dashboard/stock/addinventory" component={AddInventory}/>
+                    </Switch>
+                </>:
+                (depid === '2') ?
+                <> 
+                    <SubNavBar type="stock"/>
+                    <Switch>
+                        <Route path="/dashboard/stock/productlist" component={() =><ProductList data={product}/>}/>
+                        {/* <Route path="/dashboard/stock/rawmateriallist" component={() => <RawMaterialList data={raw}/>}/> */}
+                        <Route path="/dashboard/stock/addinventory" component={AddInventory}/>
+                    </Switch>
+                </>:
+                (depid === '3' || depid === '6') ?
+                <> 
+                    <SubNavBar type="stock"/>
+                    <Switch>
+                        <Route path="/dashboard/stock/productlist" component={() =><ProductList data={product}/>}/>
+                        <Route path="/dashboard/stock/rawmateriallist" component={() => <RawMaterialList data={raw}/>}/>
+                        {/* <Route path="/dashboard/stock/addinventory" component={AddInventory}/> */}
+                    </Switch>
+                </>:null
+
+            }
+        
+            
         </>
     );
     

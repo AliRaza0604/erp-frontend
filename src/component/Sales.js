@@ -30,6 +30,7 @@ let instance = axios.create({
 })
 
 const Sales = () => {
+  const depid = localStorage.getItem('depid');
 
   const [person,setPerson] = useState();
   const [invoicedata,setInvoicedata] = useState();
@@ -61,14 +62,41 @@ const Sales = () => {
 
   return(
       <>
-        <SubNavBar type="sales"/>
-        {/* <Chart data={data}/> */}
-        <Switch>
-            <Route path="/dashboard/sales/customerslist" component={() => <ListItems type="cust" data={person} />}/>
-            <Route path="/dashboard/sales/addcustomer" component={AddCustomers}/>
-            <Route path="/dashboard/sales/invoicelist" component={() => <Invoicelist data={invoicedata}/>}/>
-            <Route path="/dashboard/sales/newcart" component={NewCart}/>
-        </Switch>
+      {
+        (depid === '1') ?
+        <>
+          <SubNavBar type="sales"/>
+          {/* <Chart data={data}/> */}
+          <Switch>
+              <Route path="/dashboard/sales/customerslist" component={() => <ListItems type="cust" data={person} />}/>
+              <Route path="/dashboard/sales/addcustomer" component={AddCustomers}/>
+              <Route path="/dashboard/sales/invoicelist" component={() => <Invoicelist data={invoicedata}/>}/>
+              <Route path="/dashboard/sales/newcart" component={NewCart}/>
+          </Switch>
+        </>:
+        (depid === '2') ?
+        <>
+          <SubNavBar type="sales"/>
+          {/* <Chart data={data}/> */}
+          <Switch>
+              <Route path="/dashboard/sales/customerslist" component={() => <ListItems type="cust" data={person} />}/>
+              <Route path="/dashboard/sales/addcustomer" component={AddCustomers}/>
+              {/* <Route path="/dashboard/sales/invoicelist" component={() => <Invoicelist data={invoicedata}/>}/> */}
+              <Route path="/dashboard/sales/newcart" component={NewCart}/>
+          </Switch>
+        </>:
+        (depid === '5') ?
+        <>
+          <SubNavBar type="sales"/>
+          {/* <Chart data={data}/> */}
+          <Switch>
+              <Route path="/dashboard/sales/customerslist" component={() => <ListItems type="cust" data={person} />}/>
+              {/* <Route path="/dashboard/sales/addcustomer" component={AddCustomers}/> */}
+              <Route path="/dashboard/sales/invoicelist" component={() => <Invoicelist data={invoicedata}/>}/>
+              {/* <Route path="/dashboard/sales/newcart" component={NewCart}/> */}
+          </Switch>
+        </>:null
+      }
       </>
     );
 

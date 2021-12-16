@@ -19,8 +19,8 @@ const SubNavBar = (props) =>{
             </>:
             (type === 'purchase') ?
             <>
-            <NavLink to="/dashboard/stock/purchaselist" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsBoxSeam className="inline-block mr-4 "/></NavLink>
-            <NavLink to="/dashboard/stock/makepurchase" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsPlusCircle className="inline-block mr-4 "/></NavLink>
+            <NavLink to="/dashboard/purchase/purchaselist" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsBoxSeam className="inline-block mr-4 "/></NavLink>
+            <NavLink to="/dashboard/purchase/makepurchase" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsPlusCircle className="inline-block mr-4 "/></NavLink>
             </>:
             (type === 'stock') ?
             <>

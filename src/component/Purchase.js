@@ -20,6 +20,7 @@ let instance = axios.create({
 
 const Purchase = () => {
 
+    const depid = localStorage.getItem('depid');
     const [purchase,setPurchase] = useState();
     
     useEffect (async () => {
@@ -43,11 +44,27 @@ const Purchase = () => {
 
     return(
         <>
-            <SubNavBar type="purchase"/>
-            <Switch>
-                <Route path="/dashboard/purchase/purchaselist" component={() =><PurchaseList data={purchase}/>}/>
-                <Route path="/dashboard/purchase/makepurchase" component={MakePurchase}/>                
-            </Switch>
+        {
+            (depid === '1' || depid === '4')?
+            <>
+                <SubNavBar type="purchase"/>
+                <Switch>
+                    <Route path="/dashboard/purchase/purchaselist" component={() =><PurchaseList data={purchase}/>}/>
+                    <Route path="/dashboard/purchase/makepurchase" component={MakePurchase}/>                
+                </Switch>
+            </>:
+            (depid === '3')?
+            <>
+                <SubNavBar type="purchase"/>
+                <Switch>
+                    <Route path="/dashboard/purchase/purchaselist" component={() =><PurchaseList data={purchase}/>}/>
+                    {/* <Route path="/dashboard/purchase/makepurchase" component={MakePurchase}/>                 */}
+                </Switch>
+            </>:null
+
+            
+        }
+            
         </>
     );
     
