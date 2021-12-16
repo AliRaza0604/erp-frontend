@@ -1,4 +1,4 @@
-import React, {createContext,useReducer}  from "react";
+import React from "react";
 import { Route, Switch } from "react-router";
 import SubNavBar from "./SubNavBar";
 import ProductList from "./stock/ProductList";

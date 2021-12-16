@@ -77,6 +77,8 @@ const data = [
 ];
 
 const TBChart = (props) => {
+
+  // const {data} = props
   return (
     <BarChart width={100} height={30} data={data}>
       <Bar dataKey="uv" fill={props.fill} />

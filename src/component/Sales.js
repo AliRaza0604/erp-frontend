@@ -18,6 +18,8 @@ for(let num = 30; num >= 0; num--){
   })
 }
 
+// console.log(data.date[0])
+
 let instance = axios.create({
   baseURL: 'https://ssm-erp-backend.herokuapp.com',
   headers: {

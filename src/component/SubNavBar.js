@@ -17,6 +17,11 @@ const SubNavBar = (props) =>{
             <NavLink to="/dashboard/employees/addemployee" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsPersonPlus className="inline-block mr-4 "/></NavLink>
             <NavLink to="/dashboard/employees/updateemployee" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><AiOutlineEdit className="inline-block mr-4 "/></NavLink>
             </>:
+            (type === 'purchase') ?
+            <>
+            <NavLink to="/dashboard/stock/purchaselist" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsBoxSeam className="inline-block mr-4 "/></NavLink>
+            <NavLink to="/dashboard/stock/makepurchase" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsPlusCircle className="inline-block mr-4 "/></NavLink>
+            </>:
             (type === 'stock') ?
             <>
             <NavLink to="/dashboard/stock/productlist" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsBoxSeam className="inline-block mr-4 "/></NavLink>

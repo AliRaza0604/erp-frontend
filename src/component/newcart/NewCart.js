@@ -77,12 +77,12 @@ const NewCart = () => {
     };
 
     const onCheckout = async () => {
-        console.log(invoice_items)
-        console.log(localStorage.getItem('staffid'))
-        console.log(accid)
-        console.log(duedate)
-        console.log(creationdate)
-        console.log(collectorid)
+        // console.log(invoice_items)
+        // console.log(localStorage.getItem('staffid'))
+        // console.log(accid)
+        // console.log(duedate)
+        // console.log(creationdate)
+        // console.log(collectorid)
 
         try {
             let res = await instance.post('/api/invoices/',

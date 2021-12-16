@@ -8,6 +8,7 @@ import Stock from "./Stock";
 import Production from "./Production";
 import Home from "./Home";
 import Profile from "./Profile";
+import Purchase from "./Purchase";
 
 
 const Landing = () => {
@@ -19,6 +20,7 @@ const Landing = () => {
                     <Route path="/dashboard/home" component={Home}/>
                     <Route path="/dashboard/profile" component={Profile}/>
                     <Route path="/dashboard/employees" component={Employees}/>
+                    <Route path="/dashboard/purchase" component={Purchase}/>
                     <Route path="/dashboard/stock" component={Stock}/>
                     <Route path="/dashboard/sales" component={Sales}/>
                     <Route path="/dashboard/production" component={Production}/>

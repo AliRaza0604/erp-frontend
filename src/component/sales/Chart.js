@@ -4,6 +4,7 @@ import { format, parseISO} from "date-fns";
 
 
 const Chart = (props) => {
+    console.log(props.data)
     return(
         <div className="mt-32 ml-0">
         <ResponsiveContainer width="100%" height={400}>

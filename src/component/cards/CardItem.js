@@ -51,6 +51,37 @@ const CardItems = (props) => {
         }
     }
 
+    var today = new Date(),
+    date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+    const [paymentDate,setpaymentDate] = useState(date);
+    const [collectorID,setCollectorID] = useState(localStorage.getItem('staffid'));
+
+    const updateInvoice = async () => {
+
+        console.log(paymentDate)
+        console.log(collectorID)
+  
+        try {
+            let res = await instance.put(`/api/invoices/${data.invid}/makepayment/`,
+                {
+                    // headers: {
+                    //     "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    // }
+
+                    "paymentDate":paymentDate,
+                    collectorID
+
+
+                }
+            );
+            console.log(res);
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
     // const removeProduction = async () => {
       
     //     try {
@@ -86,6 +117,28 @@ const CardItems = (props) => {
                         </div>
                         <p className="text-base text-text3" title="ProductName">Customer ID: {data.accid}</p>
                         <p className="text-base text-text3" title="ProductName">Salesman ID: {data.salesmanid}</p>
+                        <div className="flex flex-row justify-end">
+                            <button className="ml-4 mt-2 px-4 border-2 border-primary rounded-md bg-primary text-text1" onClick={updateInvoice} >Payment Collected</button>    
+                        </div>
+                    </div>
+                </div>
+            </>:
+            (props.type === 'purch') ?
+            <>
+                <div className="m-1 w-72 p-3 border-2 border-gray-300 rounded-lg bg-white box-content flex flex-row shadow-md">
+                    <div className="w-20 h-36 mr-3 rounded-lg bg-white grid place-content-center">
+                            <BsFileEarmark className="h-10 w-10 text-primary" /> 
+                    </div>
+                    <div className="flex flex-col justify-between">
+                        <p className="text-2xl text-primary">Type: {data.purchtype}</p>
+                        <p className="text-base text-text3" title="ProductName">Purchase date: {data.purchdate}</p>
+                        <div className="flex flex-row">
+                            <span className="text-base text-secondary">Rate: {data.rate}</span>
+                        </div>
+                        <p className="text-base text-text3" title="ProductName">Quantity: {data.quantity}</p>
+                        <p className="text-base text-text3" title="ProductName">Amount: {data.amount}</p>
+                        <p className="text-base text-text3" title="ProductName">Supplier ID: {data.supplierid}</p>
+                        <p className="text-base text-text3" title="ProductName">itemid: {data.itemid}</p>
                     </div>
                 </div>
             </>:
