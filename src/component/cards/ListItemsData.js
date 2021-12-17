@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { FaUserCircle } from "react-icons/fa";
+import React from "react";
+import { FaUserCircle, FaExclamation } from "react-icons/fa";
 import axios from 'axios';
 
 let instance = axios.create({
@@ -72,7 +72,15 @@ function UserListItemsData (props) {
           <div className="flex items-center">
             <div className="flex-shrink-0 h-10 w-10">
               {/* <img className="h-10 w-10 rounded-full" src={person.image} alt="" /> */}
-              <FaUserCircle className="h-10 w-10 rounded-full text-primary" />
+              {
+                (props.type === "notipur" || props.type === "notiprod") ?
+                <>
+                  <FaExclamation className="h-10 w-10 rounded-full text-primary" />
+                </>:
+                <>
+                  <FaUserCircle className="h-10 w-10 rounded-full text-primary" />
+                </>
+              }
             </div>
             <div className="ml-4">
             {
@@ -85,6 +93,8 @@ function UserListItemsData (props) {
               (props.type === "supp") ?
               <><div className="text-sm font-medium text-gray-900">{person.contactperson}</div>
               <div className="text-sm text-gray-500">{person.phonenum}</div></>:
+              (props.type === "notipur" || props.type === "notiprod") ?
+              <><div className="text-sm font-medium text-gray-900">{person.creationdate}</div></>:
               null
             }
               
@@ -99,6 +109,8 @@ function UserListItemsData (props) {
           <><div className="text-sm text-gray-900">{person.name}</div></>:
           (props.type === "supp") ?
           <><div className="text-sm text-gray-900">{person.name}</div></>:
+          (props.type === "notipur" || props.type === "notiprod") ?
+          <><div className="text-sm text-gray-900">{person.quantityreqd}</div></>:
           null
         }
         </td>
@@ -109,22 +121,34 @@ function UserListItemsData (props) {
           <><td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{person.status}</td></>:
           (props.type === "supp") ?
           <><td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Active</td></>:
+          (props.type === "notipur") ?
+          <><td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{person.itemid}</td></>:
+          (props.type === "notiprod") ?
+          <><td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{person.prodid}</td></>:
           null
         }
-        
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{person.country}</td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" ><button className="hover:text-green-600">Edit</button></td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" >
+
         {
-          (props.type === "empl") ?
-          <button className="hover:text-red-600" onClick={removeEmp}>Remove</button>:
-          (props.type === "cust") ?
-          <button className="hover:text-red-600" onClick={removeCust}>Remove</button>:
-          (props.type === "supp") ?
-          <button className="hover:text-red-600" onClick={removeSupp}>Remove</button>:
-          null
+          (props.type === "notipur" || props.type === "notiprod") ?
+          <>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Current month</td>
+          </>:
+          <>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{person.country}</td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" ><button className="hover:text-green-600">Edit</button></td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" >
+            {
+              (props.type === "empl") ?
+              <button className="hover:text-red-600" onClick={removeEmp}>Remove</button>:
+              (props.type === "cust") ?
+              <button className="hover:text-red-600" onClick={removeCust}>Remove</button>:
+              (props.type === "supp") ?
+              <button className="hover:text-red-600" onClick={removeSupp}>Remove</button>:
+              null
+            }
+            </td>
+          </>
         }
-        </td>
       </tr>
     )
   }

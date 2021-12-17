@@ -9,6 +9,7 @@ import Production from "./Production";
 import Home from "./Home";
 import Profile from "./Profile";
 import Purchase from "./Purchase";
+import Notifications from "./Notifications";
 
 
 const Landing = () => {
@@ -19,6 +20,7 @@ const Landing = () => {
                 <Switch>
                     <Route path="/dashboard/home" component={Home}/>
                     <Route path="/dashboard/profile" component={Profile}/>
+                    <Route path="/dashboard/notifications" component={Notifications}/>
                     <Route path="/dashboard/employees" component={Employees}/>
                     <Route path="/dashboard/purchase" component={Purchase}/>
                     <Route path="/dashboard/stock" component={Stock}/>

@@ -81,8 +81,19 @@ const Sales = () => {
           <Switch>
               <Route path="/dashboard/sales/customerslist" component={() => <ListItems type="cust" data={person} />}/>
               <Route path="/dashboard/sales/addcustomer" component={AddCustomers}/>
-              {/* <Route path="/dashboard/sales/invoicelist" component={() => <Invoicelist data={invoicedata}/>}/> */}
+              <Route path="/dashboard/sales/invoicelist" component={() => <Invoicelist data={invoicedata}/>}/>
               <Route path="/dashboard/sales/newcart" component={NewCart}/>
+          </Switch>
+        </>:
+        (depid === '3') ?
+        <>
+          <SubNavBar type="sales"/>
+          {/* <Chart data={data}/> */}
+          <Switch>
+              {/* <Route path="/dashboard/sales/customerslist" component={() => <ListItems type="cust" data={person} />}/>
+              <Route path="/dashboard/sales/addcustomer" component={AddCustomers}/> */}
+              <Route path="/dashboard/sales/invoicelist" component={() => <Invoicelist data={invoicedata}/>}/>
+              {/* <Route path="/dashboard/sales/newcart" component={NewCart}/> */}
           </Switch>
         </>:
         (depid === '5') ?

@@ -17,12 +17,23 @@ function ListItemsColumn (props) {
 function UserListItemsColumn (props){
     return(
         <>
-        <ListItemsColumn title = {props.name}/>
-        <ListItemsColumn title = {props.organization}/>
-        <ListItemsColumn title = {props.role}/>
-        <ListItemsColumn title = {props.country}/>
-        <ListItemsColumn title = {props.edit}/>
-        <ListItemsColumn title = {props.remove}/>
+        {
+            (props.type === 'noti') ?
+            <>
+                <ListItemsColumn title = {props.name}/>
+                <ListItemsColumn title = {props.organization}/>
+                <ListItemsColumn title = {props.role}/>
+                <ListItemsColumn title = {props.country}/>
+            </>:
+            <>
+                <ListItemsColumn title = {props.name}/>
+                <ListItemsColumn title = {props.organization}/>
+                <ListItemsColumn title = {props.role}/>
+                <ListItemsColumn title = {props.country}/>
+                <ListItemsColumn title = {props.edit}/>
+                <ListItemsColumn title = {props.remove}/>
+            </>
+        }
         </>
     );
 }

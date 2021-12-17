@@ -18,6 +18,10 @@ const ListItems = (props) => {
                       <><UserListItemsColumn name = "Name" organization="Organization" role="Status" country="Country" edit="Edit" remove="Remove"></UserListItemsColumn></>:
                       (props.type === "supp") ?
                       <><UserListItemsColumn name = "Name" organization="Organization" role="Status" country="Country" edit="Edit" remove="Remove"></UserListItemsColumn></>:
+                      (props.type === "notipur") ?
+                      <><UserListItemsColumn type="noti" name = "Creation Date" organization="Quantity Required" role="Item Id" country="Status"></UserListItemsColumn></>:
+                      (props.type === "notiprod") ?
+                      <><UserListItemsColumn type="noti" name = "Creation Date" organization="Quantity Required" role="Item Id" country="Status"></UserListItemsColumn></>:
                       null
                     }
                   </tr>
@@ -44,6 +48,21 @@ const ListItems = (props) => {
                   <tbody className="bg-white divide-y divide-gray-200">
                     {props.data?.map((person) => (
                       <UserListItemsData key={person.supplierid} person={person} type={props.type}/>
+                    ))}
+                  </tbody>
+                  </>:
+                  (props.type === "notipur")?
+                  <>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {props.data?.map((person) => (
+                      <UserListItemsData key={person.notificationid} person={person} type={props.type}/>
+                    ))}
+                  </tbody>
+                  </>:(props.type === "notiprod")?
+                  <>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {props.data?.map((person) => (
+                      <UserListItemsData key={person.notificationid} person={person} type={props.type}/>
                     ))}
                   </tbody>
                   </>:null
