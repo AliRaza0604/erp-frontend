@@ -63,19 +63,6 @@ const AddProduction = () => {
     };
    
 
-    const onAdd2 = (product) => {
-        const exist = components.find((x) => x.itemid === product.itemid);
-        if (exist) {
-        setcomponents(
-            components.map((x) =>
-            x.itemid === product.itemid ? { ...exist, amount: exist.amount + exist.price } : x
-            )
-        );
-        } else {
-        setcomponents([...components, { ...product, amount: exist.price }]);
-        }
-    };
-
 
     const onRemove = (product) => {
         const exist = components.find((x) => x.itemid === product.itemid);
