@@ -40,7 +40,6 @@ export default function Login() {
             username,
             password
         })
-        console.log(res);
         setloggedIn(true);
         settoken(res.data.token);
         setpk(res.data.pk);
@@ -54,7 +53,6 @@ export default function Login() {
 
         setdepid(res.data[0].depid);
         setstaffid(res.data[0].staffid);
-        console.log(res);
 
 
         history.push('/dashboard/home');

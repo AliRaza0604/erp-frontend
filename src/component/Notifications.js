@@ -20,7 +20,7 @@ const Notifications = () => {
     
     useEffect (async () => {
         try {
-            let res = await instance.get('/api/purchases/notifications',
+            let res = await instance.get('/api/purchases/notifications/',
                 {
                     headers: {
                         "Authorization": `Bearer ${localStorage.getItem('token')}`
@@ -29,7 +29,7 @@ const Notifications = () => {
             );
             setpurchase(res.data);
 
-            res = await instance.get('/api/productions/notifications',
+            res = await instance.get('/api/productions/notifications/',
                 {
                     headers: {
                         "Authorization": `Bearer ${localStorage.getItem('token')}`
