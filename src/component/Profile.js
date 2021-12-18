@@ -108,6 +108,9 @@ const Profile = () => {
 
         try {
           let res = await instance.put(`/api/staff/${staffid}/`, {
+              headers: {
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
+            },
               "firstname":employeeRegisteration.firstname,
               "lastname":employeeRegisteration.lastname,
               "email":employeeRegisteration.email,

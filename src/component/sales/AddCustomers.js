@@ -41,10 +41,6 @@ const handleSubmit = async (e) => {
     try {
       let res = await instance.post('/api/customers/',{
           
-        headers: {
-            "Authorization": `Bearer ${localStorage.getItem('token')}`
-        },
-          
           "name":customerRegisteration.name,
           "status":customerRegisteration.status,
           "contactperson":customerRegisteration.contactperson,
@@ -54,6 +50,11 @@ const handleSubmit = async (e) => {
           "province":customerRegisteration.province,
           "country":customerRegisteration.country,
           "zipcode":customerRegisteration.zipcode,
+      },
+      {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
+            },
       })
   }
   catch (e) {

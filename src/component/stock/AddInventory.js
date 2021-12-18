@@ -47,17 +47,21 @@ const AddInventory = () => {
 
         try {
             let res = await instance.post('/api/inventory/', {
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem('token')}`
-                },
 
                 "itemname":rawRegisteration.itemname,
                 "description":rawRegisteration.description,
                 "quantity":rawRegisteration.quantity
-            })
+            },
+            {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`
+                },
+            }
+            )
         }
         catch (e) {
             alert("Invalid data!");
+            console.log(e);
   
         }
 
@@ -74,18 +78,21 @@ const AddInventory = () => {
         try {
             let res = await instance.post('/api/products/', {
 
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem('token')}`
-                },
-
                 "name":productRegisteration.name,
                 "description":productRegisteration.description,
                 "price":productRegisteration.price,
                 "quantity":productRegisteration.quantity
+            },
+            {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`
+                },
             })
         }
         catch (e) {
             alert("Invalid data!");
+            console.log(e);
+
   
         }
 

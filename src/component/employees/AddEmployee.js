@@ -46,9 +46,6 @@ export default function AddEmployee() {
 
         try {
           let res = await instance.post('/api/staff/', {
-            headers: {
-              "Authorization": `Bearer ${localStorage.getItem('token')}`
-          },
 
               "firstname":employeeRegisteration.firstname,
               "lastname":employeeRegisteration.lastname,
@@ -66,6 +63,11 @@ export default function AddEmployee() {
               "depid":employeeRegisteration.depid,
               "username":employeeRegisteration.username,
               "password":employeeRegisteration.password,
+          },
+          {
+              headers: {
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
+            },
           })
       }
       catch (e) {

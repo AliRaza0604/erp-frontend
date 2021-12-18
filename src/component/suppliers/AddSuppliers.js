@@ -37,9 +37,6 @@ export default function AddSuppliers() {
 
       try {
         let res = await instance.post('/api/suppliers/', {
-          headers: {
-            "Authorization": `Bearer ${localStorage.getItem('token')}`
-        },
 
             "name":supplierRegisteration.name,
             "contactperson":supplierRegisteration.contactperson,
@@ -49,6 +46,11 @@ export default function AddSuppliers() {
             "province":supplierRegisteration.province,
             "country":supplierRegisteration.country,
             "zipcode":supplierRegisteration.zipcode,
+        },
+        {
+            headers: {
+              "Authorization": `Bearer ${localStorage.getItem('token')}`
+          },
         })
     }
     catch (e) {
