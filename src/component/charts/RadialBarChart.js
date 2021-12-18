@@ -5,18 +5,15 @@ import { RadialBarChart, PolarAngleAxis, RadialBar } from "recharts";
 
 const RBChart = (props) =>{
 
-  // const valuePer = props.data[0].value/100
-  // console.log(props.value);
-  // const [value,setValue] = useState();
-  // {setValue(Math.abs(props.value))}
-  //       {console.log(value)}
+  const data2 = [{name:"a",value:100}]
+
 
     
   return(
     <>
           <RadialBarChart
-            width={400}
-            height={400}
+            width={200}
+            height={200}
             cx={125}
             cy={100}
             innerRadius={60}
@@ -40,7 +37,7 @@ const RBChart = (props) =>{
               fill={props.fill}
             />
             <text x={125} y={100} dy={8} textAnchor="middle" fill={props.fill} className="text-2xl">
-            {`${(props.value).toFixed(0)}%`}
+            {`${(props.data[0].value)}%`}
             </text>
           </RadialBarChart>
         </>  

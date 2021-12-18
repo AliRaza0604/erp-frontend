@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Chart from "./sales/Chart";
-import { subDays} from "date-fns";
 import SubNavBar from "./SubNavBar";
 import { Route, Switch } from "react-router";
 import ListItems from "./cards/ListItems";
@@ -9,14 +7,7 @@ import NewCart from "./newcart/NewCart";
 import AddCustomers from "./sales/AddCustomers";
 import Invoicelist from "./sales/Invoicelist";
 
-const data = [];
-for(let num = 30; num >= 0; num--){
-  data.push({
-    date: subDays(new Date(), num).toISOString().substr(0, 10),
-    value: 1 + Math.random(),
-    value2: 1.25 + Math.random()
-  })
-}
+
 
 // console.log(data.date[0])
 

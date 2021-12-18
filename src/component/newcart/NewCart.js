@@ -77,12 +77,6 @@ const NewCart = () => {
     };
 
     const onCheckout = async () => {
-        // console.log(invoice_items)
-        // console.log(localStorage.getItem('staffid'))
-        // console.log(accid)
-        // console.log(duedate)
-        // console.log(creationdate)
-        // console.log(collectorid)
 
         try {
             let res = await instance.post('/api/invoices/',
@@ -132,8 +126,8 @@ const NewCart = () => {
                         className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
                     </div>
                     <hr/>
-                    <div className="flex justify-between">
-                    <button onClick={onCheckout}>
+                    <div className="py-2 flex justify-between">
+                    <button onClick={onCheckout} className="border border-transparent rounded-md text-text1 bg-primary ">
                         Checkout
                     </button>
                     </div>

@@ -78,14 +78,6 @@ const AddProduction = () => {
     };
 
     const onCheckout = async () => {
-        // console.log(components)
-        // console.log(localStorage.getItem('staffid'))
-        // console.log(prodid)
-        // console.log(duedate)
-        // console.log(staffid)
-        // console.log(startdate)
-        // console.log(quantity)
-        // console.log(collectorid)
 
         try {
           let res = await instance.post('/api/productions/',
@@ -106,6 +98,7 @@ const AddProduction = () => {
         catch (e) {
             console.log(e);
         }
+
 
     }
 
@@ -135,8 +128,8 @@ const AddProduction = () => {
                         className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
                     </div>
                     <hr/>
-                    <div className="flex justify-between">
-                    <button onClick={onCheckout}>
+                    <div className="py-2 flex justify-between">
+                    <button onClick={onCheckout} id="checkout" className="border border-transparent rounded-md text-text1 bg-primary ">
                         Checkout
                     </button>
                     </div>

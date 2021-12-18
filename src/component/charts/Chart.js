@@ -4,10 +4,10 @@ import { format, parseISO} from "date-fns";
 
 
 const Chart = (props) => {
-    console.log(props.data)
+    // console.log(props.data)
     return(
-        <div className="mt-32 ml-0">
-        <ResponsiveContainer width="100%" height={400}>
+        <div className="py-8">
+        <ResponsiveContainer width="100%" height={200}>
             <LineChart 
                 data={props.data}
 
@@ -25,16 +25,16 @@ const Chart = (props) => {
                     </linearGradient>
                 </defs>
 
-                <defs>
+                {/* <defs>
                     <linearGradient id="color2" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="0%" stopColor="#00ff00" stopOpacity={0.4}></stop>
                         <stop offset="75%" stopColor="#00ff00" stopOpacity={0.05}></stop>
                     </linearGradient>
-                </defs>
+                </defs> */}
 
                 <Line type="monotone" dataKey="value" stroke="#ff0000" />
 
-                <Line type="monotone" dataKey="value2" stroke="#00ff00" />
+                {/* <Line type="monotone" dataKey="value2" stroke="#00ff00" /> */}
 
                 {/* <Area dataKey="value" stroke="#ff0000" fill="url(#color)"/> */}
 
@@ -46,7 +46,7 @@ const Chart = (props) => {
                         return format(date, "MMM, d")
                 }}/>
 
-                <YAxis dataKey="value" tickCount={10}/>
+                <YAxis dataKey="value" tickCount={10} domain={[0,10000]}/>
                 
                 <Tooltip content={<CustomTooltip/>}/>
 
@@ -64,9 +64,9 @@ function CustomTooltip({active, payload, label}){
     if(active){
         return(
             <div>
-                <h4>{format(parseISO(label), "eeee, d MMM, yyyy")}</h4>
-                <p>{payload[0].value.toFixed(2)}</p>
-                <p>{payload[1].value.toFixed(2)}</p>
+                <h4>{format(parseISO(label), "yyyy,MM,dd")}</h4>
+                <p>{payload[0].value}</p>
+                {/* <p>{payload[1].value.toFixed(2)}</p> */}
             </div>
         );
     }

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState} from 'react';
 import { BsLightbulbFill, BsFileEarmark} from 'react-icons/bs';
 import AvailableButton from '../forms/AvailableButton';
 import axios from 'axios';
@@ -82,22 +82,22 @@ const CardItems = (props) => {
         }
     }
 
-    // const removeProduction = async () => {
+    const removeProduction = async () => {
       
-    //     try {
-    //         let res = await instance.delete(`/api/products/${data.prodid}/`,
-    //             {
-    //                 // headers: {
-    //                 //     "Authorization": `Bearer ${localStorage.getItem('token')}`
-    //                 // }
-    //             }
-    //         );
-    //         console.log(res);
-    //     }
-    //     catch (e) {
-    //         console.log(e);
-    //     }
-    // }
+        try {
+            let res = await instance.get(`/api/productions/${data.productionid}/markfinished`,
+                {
+                    // headers: {
+                    //     "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    // }
+                }
+            );
+            console.log(res);
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
 
     
     return (
@@ -167,7 +167,7 @@ const CardItems = (props) => {
                             (props.type === 'product') ?
                             <p className="text-base text-text3" title="ProductName">{data.name}</p> :
                             (props.type === 'prod') ?
-                            <p className="text-base text-text3" title="ProductName">{data.startdate}</p> :null
+                            <p className="text-base text-text3" title="ProductName">Start Date: {data.startdate}</p> :null
                         }
                         {
                             (props.type === 'product') ?
@@ -180,9 +180,17 @@ const CardItems = (props) => {
                             </div> :
                             (props.type === 'prod') ?
                             <div className="flex flex-row">
-                                <span className="text-base text-secondary">{data.enddate}</span>
+                                <span className="text-base text-secondary">End Date: {data.enddate}</span>
                             </div> :null
                         }
+
+                        {
+                            (props.type === 'prod') ?
+                            <div className="flex flex-row">
+                                <span className="text-base text-secondary">Product ID: {data.productionid}</span>
+                            </div> :null
+                        }
+
                         {
                             (props.type === 'product') ?
                             <div>
@@ -209,11 +217,11 @@ const CardItems = (props) => {
                             (props.type === 'raw') ?
                             <>
                                 <button className="ml-4 px-4 border-2 border-primary rounded-md bg-primary text-text1" onClick={removeRaw}  >Remove Item</button>
+                            </>:
+                            (props.type === 'prod') ?
+                            <>
+                                <button className="ml-4 px-4 border-2 border-primary rounded-md bg-primary text-text1" onClick={removeProduction}  >Mark Finished</button>
                             </>:null
-                            // (props.type === 'prod') ?
-                            // <>
-                            //     <button className="ml-4 px-4 border-2 border-primary rounded-md bg-primary text-text1" onClick={removeProduction}  >Remove Item</button>
-                            // </>:null
                             
                         }
                         </div>
