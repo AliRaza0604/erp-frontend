@@ -25,7 +25,6 @@ export default function Login() {
   const [loggedIn, setloggedIn] = useState(false);
   const [token, settoken] = useState('');
   const [pk,setpk] = useState('');
-  // const [type, settype] = useState('');
 
   const history = useHistory();
 
@@ -46,7 +45,12 @@ export default function Login() {
         settoken(res.data.token);
         setpk(res.data.pk);
 
-        res = await instance.get(`/api/staff/username/${username}/`);
+        res = await instance.get(`/api/staff/username/${username}/`,
+        {
+          headers: {
+            "Authorization": `Bearer ${localStorage.getItem('token')}`
+          }
+        });
 
         setdepid(res.data[0].depid);
         setstaffid(res.data[0].staffid);
@@ -86,11 +90,7 @@ export default function Login() {
       <div className="max-w-md w-full space-y-8">
         <div className="p-8 bg-gray-50 border-4 border-solid rounded-lg border-primary">
         <div>
-          {/* <img
-            className="mx-auto h-12 w-auto"
-            src={logo}
-            alt="ERP"
-          /> */}
+
           <h2 className="mt-6 text-center text-3xl font-extrabold text-text2">LOGIN</h2>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-text2">Sign in to your account</h2>
         </div>
