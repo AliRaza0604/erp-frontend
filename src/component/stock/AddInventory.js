@@ -50,12 +50,11 @@ const AddInventory = () => {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem('token')}`
                 },
-                
+
                 "itemname":rawRegisteration.itemname,
                 "description":rawRegisteration.description,
                 "quantity":rawRegisteration.quantity
             })
-            console.log(res);
         }
         catch (e) {
             alert("Invalid data!");
@@ -95,7 +94,6 @@ const AddInventory = () => {
     return(
         <>
         <div className="col-span-6 sm:col-span-6 p-2">
-            {/* <label htmlFor="product-name" className="block text-sm font-medium text-text2" >Product Name</label> */}
             <input type="text"
               name="type"
               id="type"

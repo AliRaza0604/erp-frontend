@@ -69,8 +69,6 @@ export default function UpdateEmployee() {
 
         catch (e) {
                 alert("Invalid data!");
-                // elementButton.classList.add('bg-purple-800', 'hover:bg-purple-600', 'hover:shadow-md');
-                // elementButton.classList.remove('bg-gray-400', 'pointer-events-none');
         }
 
     }
@@ -118,8 +116,7 @@ export default function UpdateEmployee() {
           depid: '',
       });
     }
-  const [username, setusername] = useState('');
-  const [value, setValue] = useState()
+
     return (
       <>
         <div>

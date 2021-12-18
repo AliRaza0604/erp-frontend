@@ -67,7 +67,6 @@ export default function AddEmployee() {
               "username":employeeRegisteration.username,
               "password":employeeRegisteration.password,
           })
-          console.log(res);
       }
       catch (e) {
           alert("Invalid data!");

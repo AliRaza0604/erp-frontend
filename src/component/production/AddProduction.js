@@ -35,10 +35,10 @@ const AddProduction = () => {
                     }
                 }
             );
-            console.log(res);
             setProducts(res.data);
         }
         catch (e) {
+            alert("Opps Something Went Wrong")
             console.log(e);
         }
     })
@@ -91,9 +91,9 @@ const AddProduction = () => {
                   components
               }
           );
-          console.log(res);
         }
         catch (e) {
+            alert("Out Of Stock")
             console.log(e);
         }
 

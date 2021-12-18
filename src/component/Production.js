@@ -30,10 +30,10 @@ const Production = () => {
                     }
                 }
             );
-            console.log(res);
             setProduction(res.data);
         }
         catch (e) {
+            alert("Opps Something Went Wrong")
             console.log(e);
         }
     }, [])

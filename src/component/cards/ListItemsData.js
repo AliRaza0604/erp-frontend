@@ -25,10 +25,10 @@ function UserListItemsData (props) {
                   }
               }
           );
-          console.log(res);
       }
       catch (e) {
           console.log(e);
+          alert("Opps Something Went Wrong")
       }
   }
 
@@ -42,10 +42,10 @@ function UserListItemsData (props) {
                 }
             }
         );
-        console.log(res);
     }
     catch (e) {
         console.log(e);
+        alert("Opps Something Went Wrong")
     }
   }
 
@@ -59,10 +59,10 @@ function UserListItemsData (props) {
                 }
             }
         );
-        console.log(res);
     }
     catch (e) {
         console.log(e);
+        alert("Opps Something Went Wrong")
     }
 }
     

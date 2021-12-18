@@ -101,7 +101,7 @@ const Home = () => {
             
         }
         catch (e) {
-            console.log(e);
+            alert("Opps Something Went Wrong")
         }
     }, [])
 

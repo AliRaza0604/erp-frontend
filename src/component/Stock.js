@@ -35,7 +35,6 @@ const Stock = () => {
                     }
                 }
             );
-            console.log(res);
             setRaw(res.data);
 
             res = await instance.get('/api/products/',
@@ -45,10 +44,10 @@ const Stock = () => {
                     }
                 }
             );
-            console.log(res);
             setProduct(res.data);
         }
         catch (e) {
+            alert("Opps Something Went Wrong")
             console.log(e);
         }
     }, [])

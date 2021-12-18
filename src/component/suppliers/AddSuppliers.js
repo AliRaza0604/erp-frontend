@@ -40,7 +40,7 @@ export default function AddSuppliers() {
           headers: {
             "Authorization": `Bearer ${localStorage.getItem('token')}`
         },
-        
+
             "name":supplierRegisteration.name,
             "contactperson":supplierRegisteration.contactperson,
             "phonenum":supplierRegisteration.phonenum,
@@ -50,7 +50,6 @@ export default function AddSuppliers() {
             "country":supplierRegisteration.country,
             "zipcode":supplierRegisteration.zipcode,
         })
-        console.log(res);
     }
     catch (e) {
         alert("Invalid data!");

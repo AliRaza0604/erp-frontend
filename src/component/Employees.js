@@ -27,7 +27,6 @@ const Employees = () =>{
                     }
                 }
             );
-            console.log(res);
             setPerson(res.data);
         }
         catch (e) {

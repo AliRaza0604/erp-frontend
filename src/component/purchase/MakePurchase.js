@@ -43,7 +43,7 @@ const MakePurchase = () => {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem('token')}`
                 },
-                
+
                 "purchdate":purchaseRegisteration.purchdate,
                 "purchtype":purchaseRegisteration.purchtype,
                 "unit":purchaseRegisteration.unit,
@@ -53,7 +53,6 @@ const MakePurchase = () => {
                 "supplierid":purchaseRegisteration.supplierid,
                 "itemid":purchaseRegisteration.itemid,
             })
-            console.log(res);
         }
         catch (e) {
             alert("Invalid data!");

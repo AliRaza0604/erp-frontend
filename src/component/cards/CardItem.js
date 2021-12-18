@@ -27,10 +27,10 @@ const CardItems = (props) => {
                     }
                 }
             );
-            console.log(res);
         }
         catch (e) {
             console.log(e);
+            alert("Opps Something Went Wrong")
         }
     }
 
@@ -44,10 +44,10 @@ const CardItems = (props) => {
                     }
                 }
             );
-            console.log(res);
         }
         catch (e) {
             console.log(e);
+            alert("Opps Something Went Wrong")
         }
     }
 
@@ -75,10 +75,10 @@ const CardItems = (props) => {
 
                 }
             );
-            console.log(res);
         }
         catch (e) {
             console.log(e);
+            alert("Opps Something Went Wrong")
         }
     }
 
@@ -92,10 +92,10 @@ const CardItems = (props) => {
                     }
                 }
             );
-            console.log(res);
         }
         catch (e) {
             console.log(e);
+            alert("Opps Something Went Wrong")
         }
     }
 

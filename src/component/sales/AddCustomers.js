@@ -55,7 +55,6 @@ const handleSubmit = async (e) => {
           "country":customerRegisteration.country,
           "zipcode":customerRegisteration.zipcode,
       })
-      console.log(res);
   }
   catch (e) {
       alert("Invalid data!");

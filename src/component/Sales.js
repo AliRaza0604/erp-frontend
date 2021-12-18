@@ -34,18 +34,20 @@ const Sales = () => {
                     }
                 }
             );
-            console.log(res);
             setPerson(res.data);
 
             res = await instance.get('/api/invoices',
             {
+              headers: {
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
+              }
 
             }
             );
-            console.log(res);
             setInvoicedata(res.data);
         }
         catch (e) {
+            alert("Opps Something Went Wrong")
             console.log(e);
         }
   }, [])

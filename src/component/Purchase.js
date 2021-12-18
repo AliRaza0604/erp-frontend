@@ -32,11 +32,11 @@ const Purchase = () => {
                     }
                 }
             );
-            console.log(res);
             setPurchase(res.data);
         }
         catch (e) {
             console.log(e);
+            alert("Opps Something Went Wrong")
         }
     }, [])
 

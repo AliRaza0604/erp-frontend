@@ -29,10 +29,10 @@ const Suppliers = () => {
                     }
                 }
             );
-            console.log(res);
             setPerson(res.data);
         }
         catch (e) {
+            alert("Opps Something Went Wrong")
             console.log(e);
         }
     }, [])

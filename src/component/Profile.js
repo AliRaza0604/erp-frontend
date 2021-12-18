@@ -88,7 +88,6 @@ const Profile = () => {
               password
           })
 
-          console.log(res)
       }
 
       catch (e) {
@@ -125,6 +124,7 @@ const Profile = () => {
       }
       catch (e) {
           alert("Invalid data!");
+          console.log(e)
       }
 
     }
