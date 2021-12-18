@@ -46,8 +46,11 @@ export default function UpdateEmployee() {
         
         e.preventDefault();
         try {
-            let res = await instance.get(`/api/staff/${staffid}/`);
-            console.log(res)
+            let res = await instance.get(`/api/staff/${staffid}/`,{
+              headers: {
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
+              },
+            });
             setStaffid(res.data[0].staffid)
             setemployeeRegisteration({
                 firstname: res.data[0].firstname,
@@ -79,6 +82,11 @@ export default function UpdateEmployee() {
 
         try {
           let res = await instance.put(`/api/staff/${staffid}/`, {
+
+            headers: {
+              "Authorization": `Bearer ${localStorage.getItem('token')}`
+          },
+
               "firstname":employeeRegisteration.firstname,
               "lastname":employeeRegisteration.lastname,
               "joindate":employeeRegisteration.joindate,

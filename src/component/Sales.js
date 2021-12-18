@@ -36,7 +36,7 @@ const Sales = () => {
             );
             setPerson(res.data);
 
-            res = await instance.get('/api/invoices',
+            res = await instance.get('/api/invoices/',
             {
               headers: {
                 "Authorization": `Bearer ${localStorage.getItem('token')}`

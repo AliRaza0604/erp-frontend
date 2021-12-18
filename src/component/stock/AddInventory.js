@@ -73,12 +73,16 @@ const AddInventory = () => {
 
         try {
             let res = await instance.post('/api/products/', {
+
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`
+                },
+
                 "name":productRegisteration.name,
                 "description":productRegisteration.description,
                 "price":productRegisteration.price,
                 "quantity":productRegisteration.quantity
             })
-            console.log(res);
         }
         catch (e) {
             alert("Invalid data!");

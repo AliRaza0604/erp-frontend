@@ -13,7 +13,7 @@ const ListItems = (props) => {
                   <tr>
                     {
                       (props.type === "empl") ?
-                      <><UserListItemsColumn name = "Name" organization="Username" role="Dept ID" country="Country" edit="Edit" remove="Remove"></UserListItemsColumn></>:
+                      <><UserListItemsColumn name = "Name" organization="Staff ID" role="Dept ID" country="Country" edit="Edit" remove="Remove"></UserListItemsColumn></>:
                       (props.type === "cust") ?
                       <><UserListItemsColumn name = "Name" organization="Organization" role="Status" country="Country" edit="Edit" remove="Remove"></UserListItemsColumn></>:
                       (props.type === "supp") ?
