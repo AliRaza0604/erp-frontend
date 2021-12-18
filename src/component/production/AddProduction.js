@@ -80,15 +80,16 @@ const AddProduction = () => {
         try {
           let res = await instance.post('/api/productions/',
               {
-                  headers: {
-                      "Authorization": `Bearer ${localStorage.getItem('token')}`
-                  },
-
                   "startdate":startdate,
                   quantity,
                   staffid,
                   prodid,
                   components
+              },
+              {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`
+                },
               }
           );
         }

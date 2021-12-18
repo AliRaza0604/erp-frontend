@@ -80,16 +80,17 @@ const NewCart = () => {
         try {
             let res = await instance.post('/api/invoices/',
                 {
-                    headers: {
-                        "Authorization": `Bearer ${localStorage.getItem('token')}`
-                    },
-  
                     "duedate":duedate,
                     "creationdate":creationdate,
                     "salesmanid":salesmanid,
                     "accid":accid,
                     "collectorid":collectorid,
                     "invoice_items":invoice_items
+                },
+                {
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    },
                 }
             );
             console.log(res);

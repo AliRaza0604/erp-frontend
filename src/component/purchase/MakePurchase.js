@@ -40,10 +40,6 @@ const MakePurchase = () => {
         try {
             let res = await instance.post('/api/purchases/', {
 
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem('token')}`
-                },
-
                 "purchdate":purchaseRegisteration.purchdate,
                 "purchtype":purchaseRegisteration.purchtype,
                 "unit":purchaseRegisteration.unit,
@@ -52,6 +48,11 @@ const MakePurchase = () => {
                 "amount":purchaseRegisteration.amount,
                 "supplierid":purchaseRegisteration.supplierid,
                 "itemid":purchaseRegisteration.itemid,
+            },
+            {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`
+                },
             })
         }
         catch (e) {
