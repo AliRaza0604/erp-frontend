@@ -31,8 +31,6 @@ const Profile = () => {
               }
             }
           );
-            
-            console.log(res)
             setStaffid(res.data[0].staffid)
             setemployeeRegisteration({
                 firstname: res.data[0].firstname,
@@ -82,10 +80,12 @@ const Profile = () => {
       try {
           let res = await instance.put(`/api/staff/${staffid}/changepwd/`,
           {
+              password
+          },
+          {
             headers: {
               "Authorization": `Bearer ${localStorage.getItem('token')}`
-          },
-              password
+            },
           })
 
       }
@@ -104,13 +104,10 @@ const Profile = () => {
         //send to backend from here
         e.preventDefault();
 
-        console.log(employeeRegisteration)
+        // console.log(employeeRegisteration)
 
         try {
           let res = await instance.put(`/api/staff/${staffid}/`, {
-              headers: {
-                "Authorization": `Bearer ${localStorage.getItem('token')}`
-            },
               "firstname":employeeRegisteration.firstname,
               "lastname":employeeRegisteration.lastname,
               "email":employeeRegisteration.email,
@@ -121,6 +118,11 @@ const Profile = () => {
               "province":employeeRegisteration.province,
               "country":employeeRegisteration.country,
               "zipcode":employeeRegisteration.zipcode,
+          },
+          {
+              headers: {
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
+            },
           })
 
           

@@ -65,14 +65,13 @@ const CardItems = (props) => {
         try {
             let res = await instance.put(`/api/invoices/${data.invid}/makepayment/`,
                 {
+                    "paymentDate":paymentDate,
+                    collectorID
+                },
+                {
                     headers: {
                         "Authorization": `Bearer ${localStorage.getItem('token')}`
                     },
-
-                    "paymentDate":paymentDate,
-                    collectorID
-
-
                 }
             );
         }
@@ -85,13 +84,15 @@ const CardItems = (props) => {
     const removeProduction = async () => {
       
         try {
-            let res = await instance.get(`/api/productions/${data.productionid}/markfinished`,
+            let res = await instance.get(`/api/productions/${data.productionid}/markfinished/`,
                 {
                     headers: {
                         "Authorization": `Bearer ${localStorage.getItem('token')}`
                     }
                 }
             );
+
+            console.log(res)
         }
         catch (e) {
             console.log(e);
@@ -188,7 +189,15 @@ const CardItems = (props) => {
                             (props.type === 'prod') ?
                             <div className="flex flex-row">
                                 <span className="text-base text-secondary">Product ID: {data.productionid}</span>
-                            </div> :null
+                            </div> :
+                             (props.type === 'product') ?
+                             <div className="flex flex-row">
+                                 <span className="text-base text-secondary">Product ID: {data.prodid}</span>
+                             </div> :
+                              (props.type === 'raw') ?
+                              <div className="flex flex-row">
+                                  <span className="text-base text-secondary">Product ID: {data.itemid}</span>
+                              </div> :null
                         }
 
                         {
