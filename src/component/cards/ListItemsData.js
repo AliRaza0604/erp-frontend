@@ -133,7 +133,16 @@ function UserListItemsData (props) {
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Current month</td>
           </>:
           <>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{person.country}</td>
+          {
+            (props.type === "empl") ?
+            <><td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{person.country}</td></>:
+            (props.type === "cust") ?
+            <><td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{person.custid}</td></>:
+            (props.type === "supp") ?
+            <><td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{person.supplierid}</td></>:
+            null
+
+          }
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" ><button className="hover:text-green-600">Edit</button></td>
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" >
             {
