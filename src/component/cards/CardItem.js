@@ -22,9 +22,9 @@ const CardItems = (props) => {
         try {
             let res = await instance.delete(`/api/products/${data.prodid}/`,
                 {
-                    // headers: {
-                    //     "Authorization": `Bearer ${localStorage.getItem('token')}`
-                    // }
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    }
                 }
             );
             console.log(res);
@@ -39,9 +39,9 @@ const CardItems = (props) => {
         try {
             let res = await instance.delete(`/api/inventory/${data.itemid}/`,
                 {
-                    // headers: {
-                    //     "Authorization": `Bearer ${localStorage.getItem('token')}`
-                    // }
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    }
                 }
             );
             console.log(res);
@@ -65,9 +65,9 @@ const CardItems = (props) => {
         try {
             let res = await instance.put(`/api/invoices/${data.invid}/makepayment/`,
                 {
-                    // headers: {
-                    //     "Authorization": `Bearer ${localStorage.getItem('token')}`
-                    // }
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    },
 
                     "paymentDate":paymentDate,
                     collectorID
@@ -87,9 +87,9 @@ const CardItems = (props) => {
         try {
             let res = await instance.get(`/api/productions/${data.productionid}/markfinished`,
                 {
-                    // headers: {
-                    //     "Authorization": `Bearer ${localStorage.getItem('token')}`
-                    // }
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    }
                 }
             );
             console.log(res);

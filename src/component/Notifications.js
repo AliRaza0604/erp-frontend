@@ -22,25 +22,24 @@ const Notifications = () => {
         try {
             let res = await instance.get('/api/purchases/notifications',
                 {
-                    // headers: {
-                    //     "Authorization": `Bearer ${localStorage.getItem('token')}`
-                    // }
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    }
                 }
             );
-            console.log(res);
             setpurchase(res.data);
 
             res = await instance.get('/api/productions/notifications',
                 {
-                    // headers: {
-                    //     "Authorization": `Bearer ${localStorage.getItem('token')}`
-                    // }
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    }
                 }
             );
-            console.log(res);
             setproduction(res.data);
         }
         catch (e) {
+            alert("Opps Something Went Wrong")
             console.log(e);
         }
     }, [])

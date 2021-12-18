@@ -24,9 +24,9 @@ const Suppliers = () => {
         try {
             let res = await instance.get('/api/suppliers/',
                 {
-                    // headers: {
-                    //     "Authorization": `Bearer ${localStorage.getItem('token')}`
-                    // }
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    }
                 }
             );
             console.log(res);

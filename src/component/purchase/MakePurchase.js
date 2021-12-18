@@ -39,6 +39,11 @@ const MakePurchase = () => {
 
         try {
             let res = await instance.post('/api/purchases/', {
+
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`
+                },
+                
                 "purchdate":purchaseRegisteration.purchdate,
                 "purchtype":purchaseRegisteration.purchtype,
                 "unit":purchaseRegisteration.unit,

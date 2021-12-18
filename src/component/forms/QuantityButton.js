@@ -21,7 +21,6 @@ const QuantityButton = () => {
 
     return(
     <div class="mb-2 flex flex-row">
-        {/* <label for="custom-input-number" class="mr-2 w-20 text-text3 text-sm">Quantity</label> */}
         <div class="flex flex-row h-6 ">
             <button onClick={decrement} class=" h-full w-6  border-2 border-r-0 border-primary text-text3 hover:text-text1 hover:bg-primary  rounded-l cursor-pointer flex items-center justify-center">
                 <BsDash/>

@@ -22,15 +22,16 @@ const Employees = () =>{
         try {
             let res = await instance.get('/api/staff/',
                 {
-                    // headers: {
-                    //     "Authorization": `Bearer ${localStorage.getItem('token')}`
-                    // }
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    }
                 }
             );
             console.log(res);
             setPerson(res.data);
         }
         catch (e) {
+            alert("Opps Someting Went Wrong")
             console.log(e);
         }
     }, [])

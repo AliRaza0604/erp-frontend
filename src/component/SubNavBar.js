@@ -31,7 +31,6 @@ const SubNavBar = (props) =>{
                 (depid === '3') ?
                 <>
                     <NavLink to="/dashboard/purchase/purchaselist" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsBoxSeam className="inline-block mr-4 "/></NavLink>
-                    {/* <NavLink to="/dashboard/purchase/makepurchase" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsPlusCircle className="inline-block mr-4 "/></NavLink> */}
                 </>:
                 <>
                     <NavLink to="/dashboard/purchase/purchaselist" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsBoxSeam className="inline-block mr-4 "/></NavLink>
@@ -47,7 +46,6 @@ const SubNavBar = (props) =>{
                 <>
                     <NavLink to="/dashboard/stock/productlist" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsBoxSeam className="inline-block mr-4 "/></NavLink>
                     <NavLink to="/dashboard/stock/rawmateriallist" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsMinecartLoaded className="inline-block mr-4 "/></NavLink>
-                    {/* <NavLink to="/dashboard/stock/addinventory" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsPlusCircle className="inline-block mr-4 "/></NavLink> */}
                 </>:
                 <>
                     <NavLink to="/dashboard/stock/productlist" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsBoxSeam className="inline-block mr-4 "/></NavLink>
@@ -62,19 +60,13 @@ const SubNavBar = (props) =>{
             {
                 (depid === '3') ?
                 <>
-                    {/* <NavLink to="/dashboard/sales/customerslist" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsPeople className="inline-block mr-4 "/></NavLink>
-                    <NavLink to="/dashboard/sales/addcustomer" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsPersonPlus className="inline-block mr-4 "/></NavLink> */}
                     <NavLink to="/dashboard/sales/invoicelist" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsFileEarmark className="inline-block mr-4 "/></NavLink>
-                    {/* <NavLink to="/dashboard/sales/newcart" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsCart className="inline-block mr-4 "/></NavLink> */}
 
                 </>:
                 (depid === '5') ?
                 <>
                     <NavLink to="/dashboard/sales/customerslist" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsPeople className="inline-block mr-4 "/></NavLink>
-                    {/* <NavLink to="/dashboard/sales/addcustomer" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsPersonPlus className="inline-block mr-4 "/></NavLink> */}
                     <NavLink to="/dashboard/sales/invoicelist" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsFileEarmark className="inline-block mr-4 "/></NavLink>
-                    {/* <NavLink to="/dashboard/sales/newcart" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsCart className="inline-block mr-4 "/></NavLink> */}
-
                 </>:
                 <>
                     <NavLink to="/dashboard/sales/customerslist" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsPeople className="inline-block mr-4 "/></NavLink>

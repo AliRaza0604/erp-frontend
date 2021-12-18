@@ -9,7 +9,6 @@ import Invoicelist from "./sales/Invoicelist";
 
 
 
-// console.log(data.date[0])
 
 let instance = axios.create({
   baseURL: 'https://ssm-erp-backend.herokuapp.com',
@@ -30,9 +29,9 @@ const Sales = () => {
         try {
             let res = await instance.get('/api/customers/',
                 {
-                    // headers: {
-                    //     "Authorization": `Bearer ${localStorage.getItem('token')}`
-                    // }
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    }
                 }
             );
             console.log(res);
@@ -57,7 +56,6 @@ const Sales = () => {
         (depid === '1') ?
         <>
           <SubNavBar type="sales"/>
-          {/* <Chart data={data}/> */}
           <Switch>
               <Route path="/dashboard/sales/customerslist" component={() => <ListItems type="cust" data={person} />}/>
               <Route path="/dashboard/sales/addcustomer" component={AddCustomers}/>
@@ -68,7 +66,6 @@ const Sales = () => {
         (depid === '2') ?
         <>
           <SubNavBar type="sales"/>
-          {/* <Chart data={data}/> */}
           <Switch>
               <Route path="/dashboard/sales/customerslist" component={() => <ListItems type="cust" data={person} />}/>
               <Route path="/dashboard/sales/addcustomer" component={AddCustomers}/>
@@ -79,23 +76,17 @@ const Sales = () => {
         (depid === '3') ?
         <>
           <SubNavBar type="sales"/>
-          {/* <Chart data={data}/> */}
+
           <Switch>
-              {/* <Route path="/dashboard/sales/customerslist" component={() => <ListItems type="cust" data={person} />}/>
-              <Route path="/dashboard/sales/addcustomer" component={AddCustomers}/> */}
               <Route path="/dashboard/sales/invoicelist" component={() => <Invoicelist data={invoicedata}/>}/>
-              {/* <Route path="/dashboard/sales/newcart" component={NewCart}/> */}
           </Switch>
         </>:
         (depid === '5') ?
         <>
           <SubNavBar type="sales"/>
-          {/* <Chart data={data}/> */}
           <Switch>
               <Route path="/dashboard/sales/customerslist" component={() => <ListItems type="cust" data={person} />}/>
-              {/* <Route path="/dashboard/sales/addcustomer" component={AddCustomers}/> */}
               <Route path="/dashboard/sales/invoicelist" component={() => <Invoicelist data={invoicedata}/>}/>
-              {/* <Route path="/dashboard/sales/newcart" component={NewCart}/> */}
           </Switch>
         </>:null
       }

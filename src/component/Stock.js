@@ -30,9 +30,9 @@ const Stock = () => {
         try {
             let res = await instance.get('/api/inventory/',
                 {
-                    // headers: {
-                    //     "Authorization": `Bearer ${localStorage.getItem('token')}`
-                    // }
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    }
                 }
             );
             console.log(res);
@@ -40,9 +40,9 @@ const Stock = () => {
 
             res = await instance.get('/api/products/',
                 {
-                    // headers: {
-                    //     "Authorization": `Bearer ${localStorage.getItem('token')}`
-                    // }
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    }
                 }
             );
             console.log(res);
@@ -82,7 +82,6 @@ const Stock = () => {
                     <Switch>
                         <Route path="/dashboard/stock/productlist" component={() =><ProductList data={product}/>}/>
                         <Route path="/dashboard/stock/rawmateriallist" component={() => <RawMaterialList data={raw}/>}/>
-                        {/* <Route path="/dashboard/stock/addinventory" component={AddInventory}/> */}
                     </Switch>
                 </>:null
 

@@ -4,8 +4,7 @@ export default function Basket(props) {
   const { invoice_items, onAdd, onRemove} = props;
   const itemsPrice = invoice_items.reduce((a, c) => a + c.quantity * c.price, 0);
 
-  // const taxPrice = itemsPrice * 0.14;
-  // const shippingPrice = itemsPrice > 2000 ? 0 : 20;
+
   const totalPrice = itemsPrice;
   return (
     <aside className="bg-secondary p-4 m-2 rounded-lg">
@@ -37,16 +36,6 @@ export default function Basket(props) {
               <div className="">Items Price</div>
               <div className="text-right">${itemsPrice}</div>
             </div>
-            {/* <div className="flex justify-between">
-              <div className="">Tax Price</div>
-              <div className="text-right">${taxPrice}</div>
-            </div>
-            <div className="flex justify-between">
-              <div className="">Shipping Price</div>
-              <div className="text-right">
-                ${shippingPrice}
-              </div>
-            </div> */}
 
             <div className="flex justify-between">
               <div className="">

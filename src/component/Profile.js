@@ -24,7 +24,14 @@ const Profile = () => {
     
     useEffect (async() => {
         try {
-            let res = await instance.get(`/api/staff/username/${username}/`);
+            let res = await instance.get(`/api/staff/username/${username}/`,
+            {
+              headers: {
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
+              }
+            }
+          );
+            
             console.log(res)
             setStaffid(res.data[0].staffid)
             setemployeeRegisteration({
@@ -43,8 +50,6 @@ const Profile = () => {
 
         catch (e) {
                 alert("Invalid data!");
-                // elementButton.classList.add('bg-purple-800', 'hover:bg-purple-600', 'hover:shadow-md');
-                // elementButton.classList.remove('bg-gray-400', 'pointer-events-none');
         }
     },[])
 
@@ -77,6 +82,9 @@ const Profile = () => {
       try {
           let res = await instance.put(`/api/staff/${staffid}/changepwd/`,
           {
+            headers: {
+              "Authorization": `Bearer ${localStorage.getItem('token')}`
+          },
               password
           })
 
@@ -85,8 +93,7 @@ const Profile = () => {
 
       catch (e) {
               alert("Invalid data!");
-              // elementButton.classList.add('bg-purple-800', 'hover:bg-purple-600', 'hover:shadow-md');
-              // elementButton.classList.remove('bg-gray-400', 'pointer-events-none');
+
       }
 
       setpassword('');
@@ -192,16 +199,6 @@ const Profile = () => {
                           onChange={handleInput}
                           className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
                       </div>
-
-                      {/* <div className="col-span-6 sm:col-span-4">
-                        <label htmlFor="password" className="block text-sm font-medium text-text2" >Change Password</label>
-                        <input type="password"
-                          name="password"
-                          id="password"
-                          value={employeeRegisteration.password}
-                          onChange={handleInput}
-                          className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
-                      </div> */}
 
                       <div className="col-span-6 sm:col-span-6">
                         <label htmlFor="phonenum" className="block text-sm font-medium text-text2" >Phone Number</label>

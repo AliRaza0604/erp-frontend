@@ -27,9 +27,9 @@ const Purchase = () => {
         try {
             let res = await instance.get('/api/purchases/',
                 {
-                    // headers: {
-                    //     "Authorization": `Bearer ${localStorage.getItem('token')}`
-                    // }
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    }
                 }
             );
             console.log(res);
@@ -58,7 +58,6 @@ const Purchase = () => {
                 <SubNavBar type="purchase"/>
                 <Switch>
                     <Route path="/dashboard/purchase/purchaselist" component={() =><PurchaseList data={purchase}/>}/>
-                    {/* <Route path="/dashboard/purchase/makepurchase" component={MakePurchase}/>                 */}
                 </Switch>
             </>:null
 

@@ -20,9 +20,9 @@ function UserListItemsData (props) {
       try {
           let res = await instance.delete(`/api/staff/${person.staffid}/`,
               {
-                  // headers: {
-                  //     "Authorization": `Bearer ${localStorage.getItem('token')}`
-                  // }
+                  headers: {
+                      "Authorization": `Bearer ${localStorage.getItem('token')}`
+                  }
               }
           );
           console.log(res);
@@ -37,9 +37,9 @@ function UserListItemsData (props) {
     try {
         let res = await instance.delete(`/api/customers/${person.custid}/`,
             {
-                // headers: {
-                //     "Authorization": `Bearer ${localStorage.getItem('token')}`
-                // }
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`
+                }
             }
         );
         console.log(res);
@@ -54,9 +54,9 @@ function UserListItemsData (props) {
     try {
         let res = await instance.delete(`/api/suppliers/${person.supplierid}/`,
             {
-                // headers: {
-                //     "Authorization": `Bearer ${localStorage.getItem('token')}`
-                // }
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`
+                }
             }
         );
         console.log(res);
@@ -71,7 +71,6 @@ function UserListItemsData (props) {
         <td className="px-6 py-4 whitespace-nowrap">
           <div className="flex items-center">
             <div className="flex-shrink-0 h-10 w-10">
-              {/* <img className="h-10 w-10 rounded-full" src={person.image} alt="" /> */}
               {
                 (props.type === "notipur" || props.type === "notiprod") ?
                 <>

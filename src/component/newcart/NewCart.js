@@ -31,9 +31,9 @@ const NewCart = () => {
         try {
             let res = await instance.get('/api/products/',
                 {
-                    // headers: {
-                    //     "Authorization": `Bearer ${localStorage.getItem('token')}`
-                    // }
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    }
                 }
             );
             console.log(res);
@@ -45,7 +45,6 @@ const NewCart = () => {
     }, [])
 
     const [products,setProducts] = useState();
-    // const {products} = data;
     const [invoice_items, setinvoice_items] = useState([]);
 
     const onAdd = (product) => {
@@ -81,9 +80,9 @@ const NewCart = () => {
         try {
             let res = await instance.post('/api/invoices/',
                 {
-                    // headers: {
-                    //     "Authorization": `Bearer ${localStorage.getItem('token')}`
-                    // }
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    },
   
                     "duedate":duedate,
                     "creationdate":creationdate,

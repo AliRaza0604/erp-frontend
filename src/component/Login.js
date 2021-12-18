@@ -48,8 +48,6 @@ export default function Login() {
 
         res = await instance.get(`/api/staff/username/${username}/`);
 
-        // settype(res.data.role);
-        // setusername(res.data.username);
         setdepid(res.data[0].depid);
         setstaffid(res.data[0].staffid);
         console.log(res);

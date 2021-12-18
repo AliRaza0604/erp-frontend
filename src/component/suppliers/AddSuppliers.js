@@ -37,6 +37,10 @@ export default function AddSuppliers() {
 
       try {
         let res = await instance.post('/api/suppliers/', {
+          headers: {
+            "Authorization": `Bearer ${localStorage.getItem('token')}`
+        },
+        
             "name":supplierRegisteration.name,
             "contactperson":supplierRegisteration.contactperson,
             "phonenum":supplierRegisteration.phonenum,

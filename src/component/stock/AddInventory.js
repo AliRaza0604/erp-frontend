@@ -47,6 +47,10 @@ const AddInventory = () => {
 
         try {
             let res = await instance.post('/api/inventory/', {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`
+                },
+                
                 "itemname":rawRegisteration.itemname,
                 "description":rawRegisteration.description,
                 "quantity":rawRegisteration.quantity

@@ -23,7 +23,6 @@ const AddProduction = () => {
     const [prodid, setprodid] = useState('');
     const [duedate, setDuedate] = useState();
     const [startdate, setstartdate] = useState(date);
-    // const [collectorid, setCollectorid] = useState('null');
     const [staffid, setStaffid] = useState(localStorage.getItem('staffid'));
     const [quantity, setQuantity] = useState('');
 
@@ -31,9 +30,9 @@ const AddProduction = () => {
         try {
             let res = await instance.get('/api/inventory/',
                 {
-                    // headers: {
-                    //     "Authorization": `Bearer ${localStorage.getItem('token')}`
-                    // }
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    }
                 }
             );
             console.log(res);
@@ -46,7 +45,6 @@ const AddProduction = () => {
 
     useEffect( () => {fun()},[])
     const [products,setProducts] = useState();
-    // const {products} = data;
     const [components, setcomponents] = useState([]);
 
     const onAdd = (product) => {
@@ -82,9 +80,9 @@ const AddProduction = () => {
         try {
           let res = await instance.post('/api/productions/',
               {
-                  // headers: {
-                  //     "Authorization": `Bearer ${localStorage.getItem('token')}`
-                  // }
+                  headers: {
+                      "Authorization": `Bearer ${localStorage.getItem('token')}`
+                  },
 
                   "startdate":startdate,
                   quantity,
