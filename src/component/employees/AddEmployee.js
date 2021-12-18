@@ -164,23 +164,6 @@ export default function AddEmployee() {
                           className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
                       </div>
 
-                      {/* <div className="col-span-6 sm:col-span-3">
-                        <label htmlFor="gender" className="block text-sm font-medium text-text2">
-                          Gender
-                        </label>
-                        <select
-                          name="gender" 
-                          id="gender"
-                          value={employeeRegisteration.gender}
-                          onChange={handleInput}
-                          className="mt-1 block w-full py-2 px-3 border border-secondary bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
-                        >
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
-                          <option value="other">Other</option>
-                        </select>
-                      </div> */}
-
                       <div className="col-span-6 sm:col-span-4">
                         <label htmlFor="dob" className="block text-sm font-medium text-text2" >Date of Birth</label>
                         <input type="date"
@@ -193,20 +176,9 @@ export default function AddEmployee() {
                           className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
                       </div>
 
-                      {/* <div className="col-span-6 sm:col-span-4">
-                        <label htmlFor="country" className="block text-sm font-medium text-text2">
-                          Contact Number
-                        </label>
-                        <PhoneInput placeholder="Enter phone number"
-                          country="PK"
-                          value={employeeRegisteration.phone}
-                          onChange={handleInput}
-                          className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
-                      </div> */}
-
                       <div className="col-span-6 sm:col-span-4">
                         <label htmlFor="phonenum" className="block text-sm font-medium text-text2" >Phone Number</label>
-                        <input type="number"
+                        <input type="text"
                           placeholder="03XX-XXXXXXX"
                           min="0"
                           name="phonenum"
@@ -249,7 +221,7 @@ export default function AddEmployee() {
 
                       <div className="col-span-6 sm:col-span-4">
                         <label htmlFor="salary" className="block text-sm font-medium text-text2" >Salary</label>
-                        <input type='number'
+                        <input type='text'
                           min="0"
                           name="salary"
                           id="salary"
@@ -270,19 +242,6 @@ export default function AddEmployee() {
                           onChange={handleInput}
                           className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
                       </div>
-
-                      {/* <div className="col-span-6 sm:col-span-4">
-                        <label htmlFor="bankno" className="block text-sm font-medium text-text2" >Bank Account Number</label>
-                        <input type="number"
-                          placeholder="XXXXXXXXX"
-                          min="0"
-                          name="bankno"
-                          id="bankno"
-                          required
-                          value={employeeRegisteration.bankno}
-                          onChange={handleInput}
-                          className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
-                      </div> */}
   
                       <div className="col-span-6 sm:col-span-3">
                         <label htmlFor="country" className="block text-sm font-medium text-text2">
@@ -341,25 +300,7 @@ export default function AddEmployee() {
                           className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md"/>
                       </div>
                   </div>
-                  {/* <div>
-                    <label className="block text-sm font-medium text-text2">Photo</label>
-                      <div className="mt-1 flex items-center">
-                        <span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                          <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                          </svg>
-                        </span>
-                        <input
-                          type="button"
-                          type="file" 
-                          value={employeeRegisteration.image} 
-                          onChange={handleInput} 
-                          name="image" 
-                          id="image"
-                          className="ml-5 bg-white py-2 px-3 border border-secondary rounded-md shadow-sm text-sm leading-4 font-medium text-text2 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-                        />
-                      </div>
-                  </div> */}
+                  
                 </div>
                   <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                     <button

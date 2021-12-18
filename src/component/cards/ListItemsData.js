@@ -104,7 +104,7 @@ function UserListItemsData (props) {
         <td className="px-6 py-4 whitespace-nowrap">
         {
           (props.type === "empl") ?
-          <><div className="text-sm text-gray-900">ABC Manufacturer</div></>:
+          <><div className="text-sm text-gray-900">{person.staffid}</div></>:
           (props.type === "cust") ?
           <><div className="text-sm text-gray-900">{person.name}</div></>:
           (props.type === "supp") ?

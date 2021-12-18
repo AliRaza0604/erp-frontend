@@ -46,7 +46,7 @@ export default function UpdateEmployee() {
         
         e.preventDefault();
         try {
-            let res = await instance.get(`/api/staff/username/${username}/`);
+            let res = await instance.get(`/api/staff/${staffid}/`);
             console.log(res)
             setStaffid(res.data[0].staffid)
             setemployeeRegisteration({
@@ -140,11 +140,11 @@ export default function UpdateEmployee() {
                       <div className="col-span-6 sm:col-span-6">
                         <label className="block text-sm font-medium text-text2" >Search Employee</label>
                         <input type="text"
-                          name="username"
-                          id="username"
-                          autoComplete="username"
-                          placeholder="Enter Username"
-                          onChange={(e) => setusername(e.target.value)}
+                          name="staffid"
+                          id="staffid"
+                          autoComplete="staffid"
+                          placeholder="Enter Staff ID"
+                          onChange={(e) => setStaffid(e.target.value)}
                           className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-secondary rounded-md "/>
                         </div>
                         <div className="col-span-6 sm:col-span-6">
@@ -204,7 +204,7 @@ export default function UpdateEmployee() {
 
                       <div className="col-span-6 sm:col-span-6">
                         <label htmlFor="phonenum" className="block text-sm font-medium text-text2" >Phone Number</label>
-                        <input type="number"
+                        <input type="text"
                           placeholder="03XX-XXXXXXX"
                           min="0"
                           name="phonenum"
@@ -228,7 +228,7 @@ export default function UpdateEmployee() {
 
                       <div className="col-span-6 sm:col-span-6">
                         <label htmlFor="depid" className="block text-sm font-medium text-text2" >Department ID</label>
-                        <input type="number"
+                        <input type="text"
                           name="depid"
                           id="depid"
                           value={employeeRegisteration.depid}
@@ -238,7 +238,7 @@ export default function UpdateEmployee() {
 
                       <div className="col-span-6 sm:col-span-6">
                         <label htmlFor="salary" className="block text-sm font-medium text-text2" >Salary</label>
-                        <input type='number'
+                        <input type='text'
                           min="0"
                           name="salary"
                           id="salary"

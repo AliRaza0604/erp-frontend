@@ -5,9 +5,6 @@ import { RadialBarChart, PolarAngleAxis, RadialBar } from "recharts";
 
 const RBChart = (props) =>{
 
-  const data2 = [{name:"a",value:100}]
-
-
     
   return(
     <>

@@ -19,8 +19,6 @@ let instance = axios.create({
 })
 
 
-const data = [
-  ];
 
   const data2 = [
     { name: 'L1', value: 72 }
@@ -31,15 +29,6 @@ const data = [
   ];
 
 const Home = () => {
-    
-    // const datachart = [];
-    // for(let num = 30; num >= 0; num--){
-    // data.push({
-    //     date: subDays(new Date(), num).toISOString().substr(0, 10),
-    //     value: 1 + Math.random(),
-    //     value2: 1.25 + Math.random()
-    // })
-    // }
     
 
     const [gpmargin,setGpmargin] = useState(undefined);
@@ -72,14 +61,7 @@ const Home = () => {
                 }
             );
 
-            // console.log(res.data);
             setNpmargin( res.data);
-            // console.log(npmargin)
-            // gp[1]=npmargin
-            // console.log(gp)
-            // setValue(Math.abs(npmargin.value))
-            // console.log(value)
-
 
             res = await instance.get('/api/finance/total_income/',
                 {
@@ -89,9 +71,7 @@ const Home = () => {
                 }
             );
 
-            // console.log(res);
             setTotalincome((totalIncome) => res.data["TI"])
-            // console.log(totalincome)
 
             res = await instance.get('/api/finance/total_expenses/',
                 {
@@ -145,7 +125,7 @@ const Home = () => {
                     <div className="h-88 w-72 mt-12 ml-6 p-4 bg-white rounded-md">
                         <h1 className="mb-4 text-xl text-text3 font-bold font-boldtext-left">Gross Profit Margin</h1>
                         <p className="mb-4 text-gray-400 text-left">The profit you make on each dollar of sales... </p>
-                        { gpmargin !== undefined ? 
+                        {/* { gpmargin !== undefined ? 
                             <>
                                 {
                                     (gpmargin.value > 0) ?
@@ -157,13 +137,15 @@ const Home = () => {
                                     </>
                                 }
                             </>:null
-                        }
+                        } */}
+
+                        <RBChart data={data2}  fill="green"/>
                         
                     </div>
                     <div className="h-88 w-72 mt-12 ml-6 p-4 bg-white rounded-md">
                         <h1 className="mb-4 text-xl text-text3 font-bold text-left">Net Profit Margin</h1>
                         <p className="mb-4 text-gray-400 text-left">Measures your business at generating prof... </p>
-                        {
+                        {/* {
                             (npmargin !== undefined ) ?
                             <>
                             {
@@ -176,7 +158,9 @@ const Home = () => {
                                 </>
                             }
                             </>:null
-                        }
+                        } */}
+
+                        <RBChart data={data3} fill="blue"/>
                        
                     </div>
                     <div className="flex flex-col">
@@ -184,14 +168,12 @@ const Home = () => {
                         <div className="h-44 w-72 mt-12 ml-6 p-4 bg-white rounded-md">
                             <h1 className="mb-4 text-xl text-text3 font-bold text-left">TOTAL INCOME</h1>
                             <TBChart fill="purple"/>
-                            <h1 className="mt-2 mb-2 text-xl font-bold text-text3 text-left">${totalincome}</h1>
-                            <p className="mb-4 text-gray-400 text-xs text-left">5% more than previous month </p>
+                            <h1 className="mt-2 mb-2 text-xl font-bold text-text3 text-left">Rs 24330</h1>
                         </div>
                         <div className="h-44 w-72 mt-12 ml-7 p-4 bg-white rounded-md">
                             <h1 className="mb-4 text-xl text-text3 font-bold text-left">TOTAL EXPENSES</h1>
                             <TBChart fill="blue" />
                             <h1 className="mt-2 mb-2 text-xl text-text3 font-bold text-left">${totalexpense}</h1>
-                            <p className="mb-4 text-gray-400 text-xs text-left">0.7% higher vs previous month </p>
                         </div>
                         
                     </div>
@@ -200,7 +182,6 @@ const Home = () => {
                             <h1 className="mb-4 text-xl text-text3 font-bold text-left">ACCOUNTS RECEIVABLE</h1>
                             <TBChart fill="green"/>
                             <h1 className="mt-2 mb-2 text-xl text-text3 font-bold text-left">${accountsreceivable}</h1>
-                            <p className="mb-4 text-gray-400 text-xs text-left">0.7% higher vs previous month </p>
                         </div>
                         
                     </div>
