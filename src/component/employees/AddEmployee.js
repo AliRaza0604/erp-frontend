@@ -216,11 +216,11 @@ export default function AddEmployee() {
                           onChange={handleInput}
                           className="mt-1 block w-full py-2 px-3 border border-secondary bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                         >
-                          <option value={2}>Member of Finance Dept</option>
-                          <option value={4}>Member of Collection Dept</option>
-                          <option value={1}>Member of Sales Dept</option>
-                          <option value={3}>Member of Purchase Dept</option>
-                          <option value={5}>Member of Production Dept</option>
+                          <option value={3}>Member of Finance Dept</option>
+                          <option value={5}>Member of Collection Dept</option>
+                          <option value={2}>Member of Sales Dept</option>
+                          <option value={4}>Member of Purchase Dept</option>
+                          <option value={6}>Member of Production Dept</option>
                         </select>
                       </div>
 
