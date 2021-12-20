@@ -1,5 +1,6 @@
 import React from "react";
 import { FaUserCircle, FaExclamation } from "react-icons/fa";
+import {HiOutlineOfficeBuilding} from "react-icons/hi"
 import axios from 'axios';
 
 let instance = axios.create({
@@ -76,6 +77,10 @@ function UserListItemsData (props) {
                 <>
                   <FaExclamation className="h-10 w-10 rounded-full text-primary" />
                 </>:
+                (props.type === "depart") ?
+                <>
+                  <HiOutlineOfficeBuilding className="h-10 w-10 rounded-full text-primary" />
+                </>:
                 <>
                   <FaUserCircle className="h-10 w-10 rounded-full text-primary" />
                 </>
@@ -94,6 +99,8 @@ function UserListItemsData (props) {
               <div className="text-sm text-gray-500">{person.phonenum}</div></>:
               (props.type === "notipur" || props.type === "notiprod") ?
               <><div className="text-sm font-medium text-gray-900">{person.creationdate}</div></>:
+              (props.type === "depart") ?
+              <><div className="text-sm font-medium text-gray-900">{person.name}</div></>:
               null
             }
               
@@ -110,6 +117,8 @@ function UserListItemsData (props) {
           <><div className="text-sm text-gray-900">{person.name}</div></>:
           (props.type === "notipur" || props.type === "notiprod") ?
           <><div className="text-sm text-gray-900">{person.quantityreqd}</div></>:
+          (props.type === "depart") ?
+          <><td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500"></td></>:  
           null
         }
         </td>
@@ -124,6 +133,8 @@ function UserListItemsData (props) {
           <><td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{person.itemid}</td></>:
           (props.type === "notiprod") ?
           <><td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{person.prodid}</td></>:
+          (props.type === "depart") ?
+          <><td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{person.departID}</td></>:
           null
         }
 
@@ -131,6 +142,10 @@ function UserListItemsData (props) {
           (props.type === "notipur" || props.type === "notiprod") ?
           <>
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Current month</td>
+          </>:
+          (props.type === "depart") ?
+          <>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Active</td>
           </>:
           <>
           {
@@ -143,7 +158,7 @@ function UserListItemsData (props) {
             null
 
           }
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" ><button className="hover:text-green-600">Edit</button></td>
+            {/* <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" ><button className="hover:text-green-600">Edit</button></td> */}
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" >
             {
               (props.type === "empl") ?

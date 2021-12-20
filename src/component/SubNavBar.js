@@ -2,6 +2,7 @@ import React from "react";
 import {BsPeople, BsPersonPlus, BsBoxSeam, BsMinecartLoaded,BsHourglassSplit,BsCart, BsPlusCircle, BsFileEarmark} from "react-icons/bs";
 import {MdOutlinePrecisionManufacturing} from "react-icons/md";
 import {AiOutlineEdit} from "react-icons/ai";
+import {HiOutlineOfficeBuilding} from "react-icons/hi"
 import {GiFactory} from "react-icons/gi";
 import {MdAccountBalance} from "react-icons/md"
 import {NavLink} from "react-router-dom";
@@ -24,6 +25,7 @@ const SubNavBar = (props) =>{
             <NavLink to="/dashboard/employees/employeeslist" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsPeople className="inline-block mr-4 "/></NavLink>
             <NavLink to="/dashboard/employees/addemployee" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><BsPersonPlus className="inline-block mr-4 "/></NavLink>
             <NavLink to="/dashboard/employees/updateemployee" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><AiOutlineEdit className="inline-block mr-4 "/></NavLink>
+            <NavLink to="/dashboard/employees/departmentlist" className= "w-12 px-3 py-2 text-primary hover:text-secondary"><HiOutlineOfficeBuilding className="inline-block mr-4 "/></NavLink>
             </>:
             (type === 'purchase') ?
             <>

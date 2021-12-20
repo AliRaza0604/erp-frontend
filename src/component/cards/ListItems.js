@@ -22,6 +22,8 @@ const ListItems = (props) => {
                       <><UserListItemsColumn type="noti" name = "Creation Date" organization="Quantity Required" role="Item Id" country="Status"></UserListItemsColumn></>:
                       (props.type === "notiprod") ?
                       <><UserListItemsColumn type="noti" name = "Creation Date" organization="Quantity Required" role="Item Id" country="Status"></UserListItemsColumn></>:
+                      (props.type === "depart") ?
+                      <><UserListItemsColumn type="depart" name = "Department Name" organization="" role="Department ID" country="Status" ></UserListItemsColumn></>:
                       null
                     }
                   </tr>
@@ -58,11 +60,20 @@ const ListItems = (props) => {
                       <UserListItemsData key={person.notificationid} person={person} type={props.type}/>
                     ))}
                   </tbody>
-                  </>:(props.type === "notiprod")?
+                  </>:
+                  (props.type === "notiprod")?
                   <>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {props.data?.map((person) => (
                       <UserListItemsData key={person.notificationid} person={person} type={props.type}/>
+                    ))}
+                  </tbody>
+                  </>:
+                  (props.type === "depart")?
+                  <>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {props.data?.map((person) => (
+                      <UserListItemsData key={person.departID} person={person} type={props.type}/>
                     ))}
                   </tbody>
                   </>:null

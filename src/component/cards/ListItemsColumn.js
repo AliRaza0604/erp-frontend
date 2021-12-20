@@ -25,12 +25,19 @@ function UserListItemsColumn (props){
                 <ListItemsColumn title = {props.role}/>
                 <ListItemsColumn title = {props.country}/>
             </>:
+            (props.type === 'depart') ?
             <>
                 <ListItemsColumn title = {props.name}/>
                 <ListItemsColumn title = {props.organization}/>
                 <ListItemsColumn title = {props.role}/>
                 <ListItemsColumn title = {props.country}/>
-                <ListItemsColumn title = {props.edit}/>
+            </>:
+            <>
+                <ListItemsColumn title = {props.name}/>
+                <ListItemsColumn title = {props.organization}/>
+                <ListItemsColumn title = {props.role}/>
+                <ListItemsColumn title = {props.country}/>
+                {/* <ListItemsColumn title = {props.edit}/> */}
                 <ListItemsColumn title = {props.remove}/>
             </>
         }

@@ -84,6 +84,7 @@ const Home = () => {
             );
                         
             setaccountsreceivable((receivable) => res.data["AR"])
+            console.log(accountsreceivable)
 
             
 

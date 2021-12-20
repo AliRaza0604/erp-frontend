@@ -5,6 +5,7 @@ import SubNavBar from "./SubNavBar";
 import AddEmployee from "./employees/AddEmployee";
 import UpdateEmployee from "./employees/UpdateEmployee";
 import axios from "axios";
+import DepartList from "./employees/DepartList";
 
 let instance = axios.create({
     baseURL: 'https://ssm-erp-backend.herokuapp.com',
@@ -41,6 +42,7 @@ const Employees = () =>{
                 <Route path="/dashboard/employees/employeeslist" component={() => <ListItems type="empl" data={person} />}/>
                 <Route path="/dashboard/employees/addemployee" component={AddEmployee}/>
                 <Route path="/dashboard/employees/updateemployee" component={UpdateEmployee}/>
+                <Route path="/dashboard/employees/departmentlist" component={DepartList}/>
             </Switch>
         </div>
     );
